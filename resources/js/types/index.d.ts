@@ -32,6 +32,10 @@ export interface SharedData {
     [key: string]: unknown;
 }
 
+export type SharedDataAuthed = SharedData & {
+    auth: Required<Auth>;
+}
+
 export interface User {
     id: string;
     username: string;
@@ -57,6 +61,8 @@ export interface Unit {
     display_name: string;
     description?: string;
     slug: string;
+    avatar?: string;
+    banner?: string;
     created_at: string;
     updated_at: string;
 }

@@ -55,10 +55,8 @@ class HandleInertiaRequests extends Middleware
         if ($user = $request->user()) {
             $data['auth']['user'] = $user;
 
-            $memberships = UnitMember::where(
-                'user_id',
-                $user->id,
-            )
+            $memberships = $user
+                ->memberships()
                 ->with('unit')
                 ->get();
 
