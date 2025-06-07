@@ -1,26 +1,33 @@
 import Heading from '@/components/heading';
+import { Icon } from '@/components/icon';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
+import { HammerIcon, KeyIcon, PaletteIcon, UserIcon } from 'lucide-react';
 import { type PropsWithChildren } from 'react';
 
 const sidebarNavItems: NavItem[] = [
     {
         title: 'Profile',
         href: '/settings/profile',
-        icon: null,
+        icon: UserIcon,
     },
     {
         title: 'Password',
         href: '/settings/password',
-        icon: null,
+        icon: KeyIcon,
     },
     {
         title: 'Appearance',
         href: '/settings/appearance',
-        icon: null,
+        icon: PaletteIcon,
+    },
+    {
+        title: 'Developer',
+        href: '/settings/developer',
+        icon: HammerIcon,
     },
 ];
 
@@ -50,6 +57,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
                                 })}
                             >
                                 <Link href={item.href} prefetch>
+                                    {item.icon && <item.icon />}
                                     {item.title}
                                 </Link>
                             </Button>

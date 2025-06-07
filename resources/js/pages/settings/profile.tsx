@@ -52,10 +52,10 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
 
                     <form onSubmit={submit} className="space-y-6">
                         <div className="grid gap-2">
-                            <Label htmlFor="name">Username</Label>
+                            <Label htmlFor="username">Username</Label>
 
                             <Input
-                                id="name"
+                                id="username"
                                 className="mt-1 block w-full"
                                 value={data.username}
                                 onChange={(e) => setData('username', e.target.value)}
@@ -68,10 +68,10 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                         </div>
 
                         <div className="grid gap-2">
-                            <Label htmlFor="name">Display name</Label>
+                            <Label htmlFor="display_name">Display name</Label>
 
                             <Input
-                                id="name"
+                                id="display_name"
                                 className="mt-1 block w-full"
                                 value={data.display_name}
                                 onChange={(e) => setData('display_name', e.target.value)}
