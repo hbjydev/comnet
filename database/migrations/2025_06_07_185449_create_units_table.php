@@ -21,12 +21,41 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('unit_ranks', function (Blueprint $table) {
+            $table->ulid('id')->primary();
+            $table->string('display_name');
+            $table->string('short_name');
+            $table->string('icon')->nullable();
+            $table->foreignUlid('unit_id');
+            $table->timestamps();
+        });
+
+        Schema::create('unit_sections', function (Blueprint $table) {
+            $table->ulid('id')->primary();
+            $table->string('display_name');
+            $table->string('description')->nullable();
+            $table->string('icon')->nullable();
+            $table->foreignUlid('unit_id');
+            $table->timestamps();
+        });
+
+        Schema::create('unit_slots', function (Blueprint $table) {
+            $table->ulid('id')->primary();
+            $table->string('display_name');
+            $table->string('description')->nullable();
+            $table->string('icon')->nullable();
+            $table->foreignUlid('section_id');
+            $table->timestamps();
+        });
+
         Schema::create('unit_members', function (Blueprint $table) {
             $table->foreignUlid('unit_id');
             $table->foreignUlid('user_id');
             $table->string('display_name');
             $table->enum('role', ['owner', 'admin', 'normal', 'banned'])->default('normal');
             $table->jsonb('profile_data')->default('{}');
+            $table->foreignUlid('rank_id')->unique();
+            $table->foreignUlid('slot_id')->unique()->nullable();
             $table->timestamps();
 
             $table->primary(['unit_id', 'user_id']);

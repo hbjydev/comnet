@@ -26,10 +26,12 @@ class DatabaseSeeder extends Seeder
 
         $unit = Unit::factory()->create();
 
-        $membership = UnitMember::factory()->create([
+        UnitMember::factory()->create([
             'unit_id' => $unit->id,
             'user_id' => $user->id,
             'display_name' => 'Admin',
+            'role' => 'owner',
+            'rank_id' => $unit->ranks()->where('display_name', 'General')->first()->id,
         ]);
     }
 }
