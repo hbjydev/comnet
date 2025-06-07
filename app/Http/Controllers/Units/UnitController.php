@@ -23,12 +23,20 @@ class UnitController extends Controller
         ]);
     }
 
+    public function create(): Response
+    {
+        return Inertia::render('units/create');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreUnitRequest $request)
     {
-        //
+        $data = $request->validated();
+        $unit = Unit::create($data);
+
+        return to_route('units.show', ['unit' => $unit->slug]);
     }
 
     /**

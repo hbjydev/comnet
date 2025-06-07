@@ -1,15 +1,12 @@
 import HeadingSmall from '@/components/heading-small';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MembersList } from '@/components/units/members-list';
 import { useInitials } from '@/hooks/use-initials';
 import AppLayout from '@/layouts/app-layout';
-import { Paginator, SharedData, Unit, UnitMember, type BreadcrumbItem } from '@/types';
+import { SharedData, Unit, type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 import { AvatarFallback } from '@radix-ui/react-avatar';
-import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -21,16 +18,6 @@ const breadcrumbs: BreadcrumbItem[] = [
 export default function Show() {
     const initials = useInitials();
     const { unit } = usePage<SharedData & { unit: Unit }>().props;
-
-    const { data, isLoading } = useQuery<{ data: Paginator<UnitMember> }>({
-        queryKey: ['unit', unit.slug, 'members'],
-        queryFn: async () => {
-            const resp = await fetch(route('api.unit.members', {
-                unit: unit.slug,
-            }));
-            return await resp.json() as { data: Paginator<UnitMember> };
-        },
-    });
 
     const unitCreated = moment(unit.created_at);
 
@@ -74,17 +61,7 @@ export default function Show() {
 
                         </div>
                         <div className="space-y-4">
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle className="flex items-center gap-x-2">
-                                        Members
-                                        <Badge>{data ? data.data.total : 0}</Badge>
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    {isLoading ? <p>Loading...</p> : <p>Loaded</p>}
-                                </CardContent>
-                            </Card>
+                            <MembersList unit={unit} />
                         </div>
                     </div>
                 </div>

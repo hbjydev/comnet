@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Units\UnitController;
+use App\Http\Controllers\Units\UnitMemberController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -9,6 +10,9 @@ Route::get('/', function () {
 })->name('home');
 
 Route::resource('units', UnitController::class);
+Route::resource('units.members', UnitMemberController::class)->scoped([
+    'member' => 'user_id',
+]);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {

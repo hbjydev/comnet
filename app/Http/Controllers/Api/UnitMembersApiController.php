@@ -10,7 +10,7 @@ class UnitMembersApiController extends Controller
 {
     public function index(Unit $unit): Response {
         return new Response([
-            'data' => $unit->members()->paginate(25),
+            'data' => $unit->members()->with('user')->paginate(25),
         ]);
     }
 }

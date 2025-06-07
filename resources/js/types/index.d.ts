@@ -52,6 +52,7 @@ export interface UnitMember {
     user_id: string;
     unit_id: string;
     display_name: string;
+    role: 'owner' | 'admin' | 'normal' | 'banned';
     created_at: string;
     updated_at: string;
 }

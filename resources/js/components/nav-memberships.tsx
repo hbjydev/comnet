@@ -1,11 +1,12 @@
 import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { SharedData } from '@/types';
+import { type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useInitials } from '@/hooks/use-initials';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@radix-ui/react-collapsible';
-import { ChevronDownIcon } from 'lucide-react';
+import { ChevronDownIcon, LayoutDashboard, Plus, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { MemberRoleLabel } from '@/lib/utils';
 
 export function NavMemberships() {
     const initials = useInitials();
@@ -16,32 +17,59 @@ export function NavMemberships() {
     return (
         <SidebarGroup className="px-2 py-0">
             <SidebarMenu>
-                <SidebarGroupLabel>Your Units</SidebarGroupLabel>
+                <SidebarGroupLabel>
+                    <div className="w-full flex items-center justify-between">
+                        <span>Your Units</span>
+                        <Button size="sm" variant="outline" asChild>
+                            <Link href={route('units.create')}>
+                            <Plus className="h-6" /> Create
+                            </Link>
+                        </Button>
+                    </div>
+                </SidebarGroupLabel>
                 {props.auth.memberships.map((item, key) => {
                     const active = page.url.startsWith(`/units/${item.unit.slug}`);
+                    const activeRoute = (route: string, exact: boolean = false) => {
+                        const path = `/units/${item.unit.slug}${route}`;
+                        if (exact) return page.url == path;
+                        page.url.startsWith(path);
+                    }
                     return (
                         <Collapsible defaultOpen={active} className="group/collapsible" key={key}>
                             <SidebarGroup>
                                 <SidebarGroupLabel asChild>
                                     <CollapsibleTrigger asChild>
-                                        <Button variant="ghost">
+                                        <Button variant="ghost" className="h-10">
                                             <div className="flex gap-x-2 items-center text-sidebar-primary">
                                                 <Avatar>
                                                     <AvatarImage src={item.unit.avatar} />
                                                     <AvatarFallback>{initials(item.unit.display_name)}</AvatarFallback>
                                                 </Avatar>
-                                                <span>{item.unit.display_name}</span>
+                                                <div className="flex flex-col items-start gap-x-2">
+                                                    <span>{item.unit.display_name}</span>
+                                                    <span className="text-muted-foreground">{MemberRoleLabel[item.role]}</span>
+                                                </div>
                                             </div>
                                             <ChevronDownIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
                                         </Button>
                                     </CollapsibleTrigger>
                                 </SidebarGroupLabel>
                                 <CollapsibleContent>
-                                    <SidebarGroupContent>
-                                        <SidebarMenuItem key={item.unit.display_name}>
-                                            <SidebarMenuButton asChild isActive={active} tooltip={{ children: item.unit.display_name }}>
+                                    <SidebarGroupContent className="mt-4">
+                                        <SidebarMenuItem>
+                                            <SidebarMenuButton asChild isActive={activeRoute('', true)} tooltip={{ children: item.unit.display_name }}>
                                                 <Link href={route('units.show', { unit: item.unit.slug })} prefetch>
+                                                    <LayoutDashboard />
                                                     Dashboard
+                                                </Link>
+                                            </SidebarMenuButton>
+                                        </SidebarMenuItem>
+
+                                        <SidebarMenuItem>
+                                            <SidebarMenuButton asChild isActive={activeRoute('/members')} tooltip={{ children: item.unit.display_name }}>
+                                                <Link href={route('units.members.index', { unit: item.unit.slug })} prefetch>
+                                                    <Users />
+                                                    Members
                                                 </Link>
                                             </SidebarMenuButton>
                                         </SidebarMenuItem>

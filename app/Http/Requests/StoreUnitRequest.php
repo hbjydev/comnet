@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreUnitRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreUnitRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::hasUser();
     }
 
     /**
@@ -22,7 +23,9 @@ class StoreUnitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'display_name' => ['string', 'required', 'max:64'],
+            'slug' => ['string', 'required', 'lowercase', 'unique:units'],
+            'description' => ['string', 'nullable'],
         ];
     }
 }

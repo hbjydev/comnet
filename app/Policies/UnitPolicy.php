@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Unit;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class UnitPolicy
 {
@@ -29,7 +28,7 @@ class UnitPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +36,8 @@ class UnitPolicy
      */
     public function update(User $user, Unit $unit): bool
     {
-        return false;
+        $member = $unit->members()->where('user_id', $user->id)->firstOrFail();
+        return in_array($member->role, ["owner", "admin"]);
     }
 
     /**

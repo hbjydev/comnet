@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('units', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('display_name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('slug', 24)->unique();
             $table->string('avatar')->nullable();
             $table->string('banner')->nullable();
@@ -51,7 +51,7 @@ return new class extends Migration
         Schema::create('unit_members', function (Blueprint $table) {
             $table->foreignUlid('unit_id');
             $table->foreignUlid('user_id');
-            $table->string('display_name');
+            $table->string('display_name')->nullable();
             $table->enum('role', ['owner', 'admin', 'normal', 'banned'])->default('normal');
             $table->jsonb('profile_data')->default('{}');
             $table->foreignUlid('rank_id')->unique();
