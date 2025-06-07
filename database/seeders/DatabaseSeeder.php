@@ -5,8 +5,8 @@ namespace Database\Seeders;
 use App\Models\Unit;
 use App\Models\UnitMember;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Laravel\Passport\ClientRepository;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,23 +15,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $password = 'p4ssw0rd!!';
+        if (config('app.env', 'production') == "local") {
+            $password = 'p4ssw0rd!!';
 
-        $user = User::factory()->create([
-            'display_name' => 'Administrator',
-            'username' => 'admin',
-            'email' => 'test@example.com',
-            'password' => $password,
-        ]);
+            $user = User::factory()->create([
+                'display_name' => 'Administrator',
+                'username' => 'admin',
+                'email' => 'test@example.com',
+                'password' => $password,
+            ]);
 
-        $unit = Unit::factory()->create();
+            $unit = Unit::factory()->create();
 
-        UnitMember::factory()->create([
-            'unit_id' => $unit->id,
-            'user_id' => $user->id,
-            'display_name' => 'Admin',
-            'role' => 'owner',
-            'rank_id' => $unit->ranks()->where('display_name', 'General')->first()->id,
-        ]);
+            UnitMember::factory()->create([
+                'unit_id' => $unit->id,
+                'user_id' => $user->id,
+                'display_name' => 'Admin',
+                'role' => 'owner',
+                'rank_id' => $unit->ranks()->where('display_name', 'General')->first()->id,
+            ]);
+        }
+
+        app(ClientRepository::class)
+            ->createPersonalAccessGrantClient(
+                name: config('app.name'),
+                provider: 'users',
+            );
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Settings\TokenCreateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -19,5 +20,12 @@ class DeveloperController extends Controller
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => $request->session()->get('status'),
         ]);
+    }
+
+    public function issue_token(TokenCreateRequest $request): Response
+    {
+        $data = $request->validated();
+        $token = $request->user()->createToken($data->name, $data->scopes);
+        dd($token);
     }
 }

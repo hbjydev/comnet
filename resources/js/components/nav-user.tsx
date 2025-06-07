@@ -4,15 +4,24 @@ import { UserInfo } from '@/components/user-info';
 import { UserMenuContent } from '@/components/user-menu-content';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { type SharedData } from '@/types';
-import { usePage } from '@inertiajs/react';
+import { usePage, Link } from '@inertiajs/react';
 import { ChevronsUpDown } from 'lucide-react';
+import { Button } from './ui/button';
 
 export function NavUser() {
     const { auth } = usePage<SharedData>().props;
     const { state } = useSidebar();
     const isMobile = useIsMobile();
 
-    if (!auth.user) return;
+    if (!auth.user) return (
+        <SidebarMenu>
+            <SidebarMenuItem>
+                <Button size="lg" className="w-full" asChild>
+                    <Link href={route('register')}>Create an account</Link>
+                </Button>
+            </SidebarMenuItem>
+        </SidebarMenu>
+    );
 
     return (
         <SidebarMenu>
