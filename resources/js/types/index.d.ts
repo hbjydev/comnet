@@ -48,6 +48,28 @@ export interface User {
     [key: string]: unknown; // This allows for additional properties...
 }
 
+export interface UnitRank {
+    unit_id: string;
+    display_name: string;
+    short_name: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface UnitSection {
+    unit_id: string;
+    display_name: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface UnitSlot {
+    unit_id: string;
+    display_name: string;
+    created_at: string;
+    updated_at: string;
+}
+
 export interface UnitMember {
     user_id: string;
     unit_id: string;

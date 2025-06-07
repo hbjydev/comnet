@@ -11,3 +11,14 @@ export const MemberRoleLabel = {
     normal: 'Normal',
     banned: 'Banned',
 };
+
+export const formatName = (rank: string, ...options: (string | undefined)[]) => {
+    let name = '';
+    for (const nameOpt of options) {
+        if (nameOpt) {
+            name = nameOpt;
+            break;
+        }
+    }
+    return `${rank}. ${name}`;
+}
