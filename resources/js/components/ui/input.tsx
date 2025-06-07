@@ -18,4 +18,13 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   )
 }
 
-export { Input }
+function InputDescription({ className, ...props }: React.ComponentProps<"p">) {
+    return (
+      <p
+        className={cn("text-muted-foreground text-sm", className)}
+        {...props}
+      />
+    )
+}
+
+export { Input, InputDescription }
