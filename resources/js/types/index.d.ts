@@ -2,7 +2,8 @@ import { LucideIcon } from 'lucide-react';
 import type { Config } from 'ziggy-js';
 
 export interface Auth {
-    user: User;
+    user?: User;
+    memberships: (UnitMember & { unit: Unit })[];
 }
 
 export interface BreadcrumbItem {
@@ -32,7 +33,7 @@ export interface SharedData {
 }
 
 export interface User {
-    id: number;
+    id: string;
     username: string;
     display_name?: string;
     email: string;
@@ -41,4 +42,43 @@ export interface User {
     created_at: string;
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
+}
+
+export interface UnitMember {
+    user_id: string;
+    unit_id: string;
+    display_name: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Unit {
+    id: string;
+    display_name: string;
+    description?: string;
+    slug: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface PaginatorLink {
+    url?: string;
+    label: string;
+    active: boolean;
+}
+
+export interface Paginator<T = {}> {
+    current_page: number;
+    data: T[];
+    first_page_url: string;
+    from: number;
+    last_page: number;
+    last_page_url: string;
+    links: PaginatorLink[];
+    next_page_url: string;
+    path: string;
+    per_page: number;
+    prev_page_url: string;
+    to: number;
+    total: number;
 }
