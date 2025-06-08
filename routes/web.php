@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Units\UnitController;
 use App\Http\Controllers\Units\UnitMemberController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('welcome');
+Route::get('/', function (Request $request) {
+    if ($request->user()) return to_route('dashboard');
+    return to_route('units.index');
 })->name('home');
 
 Route::get('/units/{unit}/orbat', [UnitController::class, 'orbat'])->name('units.orbat');
