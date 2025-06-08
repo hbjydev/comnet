@@ -6,7 +6,7 @@ import { MemberRoleLabel } from '@/lib/utils';
 import { type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@radix-ui/react-collapsible';
-import { ChevronDownIcon, LayoutDashboard, Plus, Users } from 'lucide-react';
+import { ChevronDownIcon, LayoutDashboard, Plus, TableCellsMerge, Users } from 'lucide-react';
 
 export function NavMemberships() {
     const initials = useInitials();
@@ -15,9 +15,9 @@ export function NavMemberships() {
     if (!props.auth.user) return;
 
     return (
-        <SidebarGroup className="px-2 py-0">
+        <SidebarGroup>
             <SidebarMenu>
-                <SidebarGroupLabel className="pr-0">
+                <SidebarGroupLabel>
                     <div className="flex w-full items-center justify-between">
                         <span>Your Units</span>
                         <Button size="sm" variant="outline" asChild>
@@ -32,7 +32,7 @@ export function NavMemberships() {
                     const activeRoute = (route: string, exact: boolean = false) => {
                         const path = `/units/${item.unit.slug}${route}`;
                         if (exact) return page.url == path;
-                        page.url.startsWith(path);
+                        return page.url.startsWith(path);
                     };
                     return (
                         <Collapsible defaultOpen={active} className="group/collapsible" key={key}>
@@ -55,7 +55,7 @@ export function NavMemberships() {
                                     </CollapsibleTrigger>
                                 </SidebarGroupLabel>
                                 <CollapsibleContent>
-                                    <SidebarGroupContent className="mt-4">
+                                    <SidebarGroupContent className="mt-4 space-y-1">
                                         <SidebarMenuItem>
                                             <SidebarMenuButton
                                                 asChild
@@ -89,7 +89,7 @@ export function NavMemberships() {
                                                 tooltip={{ children: item.unit.display_name }}
                                             >
                                                 <Link href={route('units.orbat', { unit: item.unit.slug })} prefetch>
-                                                    <Users />
+                                                    <TableCellsMerge />
                                                     ORBAT
                                                 </Link>
                                             </SidebarMenuButton>
