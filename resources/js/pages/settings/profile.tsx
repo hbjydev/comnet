@@ -1,7 +1,7 @@
 import { type BreadcrumbItem, type SharedDataAuthed } from '@/types';
 import { Transition } from '@headlessui/react';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
+import { FormEventHandler, useEffect } from 'react';
 
 import DeleteUser from '@/components/delete-user';
 import HeadingSmall from '@/components/heading-small';
@@ -21,7 +21,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 type ProfileForm = {
     _method: 'patch';
-    avatar: File;
+    avatar: Blob;
     username: string;
     display_name?: string;
     email: string;
@@ -32,11 +32,19 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
 
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
         _method: 'patch',
-        avatar: new File([], 'blank.png'),
+        avatar: new Blob(),
         username: auth.user.username,
         display_name: auth.user.display_name ?? '',
         email: auth.user.email,
     });
+
+    useEffect(() => {
+        if (auth.user.avatar) {
+            fetch(auth.user.avatar)
+                .then(v => v.blob())
+                .then(v => setData('avatar', v));
+        }
+    }, []);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();

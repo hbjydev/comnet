@@ -9,7 +9,7 @@ import UnitSettingsLayout from '@/layouts/units/settings';
 import { SharedData, Unit, type BreadcrumbItem } from '@/types';
 import { Transition } from '@headlessui/react';
 import { Head, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
+import { FormEventHandler, useEffect } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -20,8 +20,8 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 type ProfileForm = {
     _method: 'patch';
-    avatar: File;
-    banner: File;
+    avatar?: Blob;
+    banner?: Blob;
     display_name: string;
     description?: string;
 };
@@ -31,11 +31,25 @@ export default function Edit() {
 
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
         _method: 'patch',
-        avatar: new File([], 'blank.png'),
-        banner: new File([], 'blank.png'),
+        avatar: new Blob(),
+        banner: new Blob(),
         display_name: unit.display_name,
         description: unit.description ?? '',
     });
+
+    useEffect(() => {
+        if (unit.avatar) {
+            fetch(unit.avatar)
+                .then(v => v.blob())
+                .then(v => setData('avatar', v));
+        }
+
+        if (unit.banner) {
+            fetch(unit.banner)
+                .then(v => v.blob())
+                .then(v => setData('banner', v));
+        }
+    }, []);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();

@@ -18,8 +18,7 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'avatar' => [
-                'image',
-                'nullable',
+                'nullable:image',
             ],
 
             'username' => [

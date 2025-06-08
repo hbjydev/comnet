@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Unit;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUnitRequest extends FormRequest
@@ -15,8 +14,8 @@ class UpdateUnitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar' => ['nullable', 'image'],
-            'banner' => ['nullable', 'image'],
+            'avatar' => ['nullable:image'],
+            'banner' => ['nullable:image'],
             'display_name' => ['string', 'required', 'max:64'],
             'description' => ['string', 'nullable'],
         ];
