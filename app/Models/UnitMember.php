@@ -21,19 +21,23 @@ class UnitMember extends Model
         'rank_id',
     ];
 
-    public function unit(): BelongsTo {
+    public function unit(): BelongsTo
+    {
         return $this->belongsTo(Unit::class);
     }
 
-    public function user(): BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function rank(): BelongsTo {
+    public function rank(): BelongsTo
+    {
         return $this->belongsTo(UnitRank::class);
     }
 
-    public function slot(): BelongsTo {
+    public function slot(): BelongsTo
+    {
         return $this->belongsTo(UnitSlot::class);
     }
 }

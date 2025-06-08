@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 class Unit extends Model
 {
     /** @use HasFactory<\Database\Factories\UnitFactory> */
-    use HasUlids, HasFactory;
+    use HasFactory, HasUlids;
 
     protected $dispatchesEvents = [
         'created' => UnitCreated::class,
@@ -27,27 +27,33 @@ class Unit extends Model
         'banner',
     ];
 
-    public function getRouteKeyName() {
+    public function getRouteKeyName()
+    {
         return 'slug';
     }
 
-    public function members(): HasMany {
+    public function members(): HasMany
+    {
         return $this->hasMany(UnitMember::class);
     }
 
-    public function ranks(): HasMany {
+    public function ranks(): HasMany
+    {
         return $this->hasMany(UnitRank::class);
     }
 
-    public function sections(): HasMany {
+    public function sections(): HasMany
+    {
         return $this->hasMany(UnitSection::class);
     }
 
-    public function slots(): HasManyThrough {
+    public function slots(): HasManyThrough
+    {
         return $this->hasManyThrough(UnitSlot::class, UnitSection::class);
     }
 
-    public function owner(): HasOneThrough {
+    public function owner(): HasOneThrough
+    {
         return $this->members->where('role', 'owner');
     }
 }

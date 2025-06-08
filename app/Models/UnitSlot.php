@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class UnitSlot extends Model
 {
     /** @use HasFactory<\Database\Factories\UnitSlotFactory> */
-    use HasUlids, HasFactory;
+    use HasFactory, HasUlids;
 
     protected $fillable = [
         'display_name',
@@ -20,11 +20,13 @@ class UnitSlot extends Model
         'icon',
     ];
 
-    public function section(): BelongsTo {
+    public function section(): BelongsTo
+    {
         return $this->belongsTo(UnitSection::class);
     }
 
-    public function member(): HasOne {
+    public function member(): HasOne
+    {
         return $this->hasOne(UnitMember::class);
     }
 }

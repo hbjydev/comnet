@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class UnitRank extends Model
 {
     /** @use HasFactory<\Database\Factories\UnitMemberFactory> */
-    use HasUlids, HasFactory;
+    use HasFactory, HasUlids;
 
     protected $fillable = [
         'unit_id',
@@ -20,11 +20,13 @@ class UnitRank extends Model
         'icon',
     ];
 
-    public function unit(): BelongsTo {
+    public function unit(): BelongsTo
+    {
         return $this->belongsTo(Unit::class);
     }
 
-    public function members(): HasMany {
+    public function members(): HasMany
+    {
         return $this->hasMany(UnitMember::class);
     }
 }

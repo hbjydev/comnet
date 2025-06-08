@@ -2,9 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Unit;
-use App\Policies\UnitPolicy;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
 

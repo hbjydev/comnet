@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        if (config('app.env', 'production') == "local") {
+        if (config('app.env', 'production') == 'local') {
             $password = 'p4ssw0rd!!';
 
             $user = User::factory()->create([

@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\UnitCreated;
-use App\Models\UnitMember;
-use App\Models\UnitRank;
 use Illuminate\Support\Facades\Auth;
 
 class CreateDefaultUnitRanks

@@ -2,8 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\UnitMember;
-use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;

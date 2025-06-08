@@ -9,7 +9,8 @@ use Illuminate\Http\Response;
 
 class UnitMembersApiController extends Controller
 {
-    public function index(Request $request, Unit $unit): Response {
+    public function index(Request $request, Unit $unit): Response
+    {
         return new Response([
             'data' => $unit
                 ->members()

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UnitSection extends Model
 {
     /** @use HasFactory<\Database\Factories\UnitMemberFactory> */
-    use HasUlids, HasFactory;
+    use HasFactory, HasUlids;
 
     protected $fillable = [
         'unit_id',
@@ -19,7 +19,8 @@ class UnitSection extends Model
         'icon',
     ];
 
-    public function unit(): BelongsTo {
+    public function unit(): BelongsTo
+    {
         return $this->belongsTo(Unit::class);
     }
 }

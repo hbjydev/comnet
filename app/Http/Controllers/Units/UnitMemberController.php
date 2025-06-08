@@ -11,7 +11,8 @@ use Inertia\Response;
 
 class UnitMemberController extends Controller
 {
-    function index(Request $request, Unit $unit): Response {
+    public function index(Request $request, Unit $unit): Response
+    {
         return Inertia::render('units/members/index', [
             'unit' => $unit,
             'members' => $unit
@@ -24,14 +25,16 @@ class UnitMemberController extends Controller
         ]);
     }
 
-    function show(Unit $unit, UnitMember $member) {
+    public function show(Unit $unit, UnitMember $member)
+    {
         return Inertia::render('units/members/show', [
             'unit' => $unit,
             'member' => $member->load(['user', 'rank', 'slot']),
         ]);
     }
 
-    function edit(Unit $unit, UnitMember $member) {
+    public function edit(Unit $unit, UnitMember $member)
+    {
         return Inertia::render('units/members/edit', [
             'unit' => $unit,
             'member' => $member->load(['user', 'rank', 'slot']),
