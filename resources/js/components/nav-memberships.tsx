@@ -6,7 +6,7 @@ import { MemberRoleLabel } from '@/lib/utils';
 import { type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@radix-ui/react-collapsible';
-import { ChevronDownIcon, LayoutDashboard, Plus, TableCellsMerge, Users } from 'lucide-react';
+import { ChevronDownIcon, Columns3, LayoutDashboard, Plus, TableCellsMerge, Users } from 'lucide-react';
 
 export function NavMemberships() {
     const initials = useInitials();
@@ -65,6 +65,19 @@ export function NavMemberships() {
                                                 <Link href={route('units.show', { unit: item.unit.slug })} prefetch>
                                                     <LayoutDashboard />
                                                     Dashboard
+                                                </Link>
+                                            </SidebarMenuButton>
+                                        </SidebarMenuItem>
+
+                                        <SidebarMenuItem>
+                                            <SidebarMenuButton
+                                                asChild
+                                                isActive={activeRoute('/members')}
+                                                tooltip={{ children: 'Members' }}
+                                            >
+                                                <Link href={route('units.sections.index', { unit: item.unit.slug })} prefetch>
+                                                    <Columns3 />
+                                                    Structure
                                                 </Link>
                                             </SidebarMenuButton>
                                         </SidebarMenuItem>
