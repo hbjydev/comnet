@@ -132,8 +132,8 @@ export default function Members() {
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell colSpan={columns(unit.slug).length} className="h-24 text-center">
-                                    No members.
+                                <TableCell colSpan={columns.length} className="h-24 text-center">
+                                    No results.
                                 </TableCell>
                             </TableRow>
                         )}

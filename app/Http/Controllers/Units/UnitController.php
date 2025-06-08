@@ -62,4 +62,19 @@ class UnitController extends Controller
     {
         //
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function orbat(Unit $unit)
+    {
+        return Inertia::render('units/orbat', [
+            'unit' => $unit,
+            'sections' => $unit->sections()
+                ->whereNull('unit_section_id')
+                ->with('slots')
+                ->with('sections')
+                ->get(),
+        ]);
+    }
 }

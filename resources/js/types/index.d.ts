@@ -59,6 +59,10 @@ export interface UnitRank {
 export interface UnitSection {
     unit_id: string;
     display_name: string;
+    icon?: string;
+    description?: string;
+    sections: UnitSection[];
+    slots: UnitSlot[];
     created_at: string;
     updated_at: string;
 }

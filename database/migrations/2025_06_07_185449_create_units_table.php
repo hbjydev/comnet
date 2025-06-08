@@ -36,6 +36,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('icon')->nullable();
             $table->foreignUlid('unit_id');
+            $table->foreignUlid('unit_section_id')->nullable()->references('id')->on('unit_sections');
             $table->timestamps();
         });
 
@@ -44,7 +45,7 @@ return new class extends Migration
             $table->string('display_name');
             $table->string('description')->nullable();
             $table->string('icon')->nullable();
-            $table->foreignUlid('section_id');
+            $table->foreignUlid('unit_section_id');
             $table->timestamps();
         });
 

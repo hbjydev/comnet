@@ -12,7 +12,7 @@ export function NavMemberships() {
     const initials = useInitials();
     const { props, ...page } = usePage<SharedData>();
 
-    if (props.auth.memberships.length == 0) return;
+    if (!props.auth.user) return;
 
     return (
         <SidebarGroup className="px-2 py-0">
@@ -78,6 +78,19 @@ export function NavMemberships() {
                                                 <Link href={route('units.members.index', { unit: item.unit.slug })} prefetch>
                                                     <Users />
                                                     Members
+                                                </Link>
+                                            </SidebarMenuButton>
+                                        </SidebarMenuItem>
+
+                                        <SidebarMenuItem>
+                                            <SidebarMenuButton
+                                                asChild
+                                                isActive={activeRoute('/orbat')}
+                                                tooltip={{ children: item.unit.display_name }}
+                                            >
+                                                <Link href={route('units.members.orbat', { unit: item.unit.slug })} prefetch>
+                                                    <Users />
+                                                    ORBAT
                                                 </Link>
                                             </SidebarMenuButton>
                                         </SidebarMenuItem>

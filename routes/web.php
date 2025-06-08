@@ -9,6 +9,7 @@ Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
 
+Route::get('/units/{unit}/orbat', [UnitController::class, 'orbat'])->name('units.orbat');
 Route::resource('units', UnitController::class);
 Route::resource('units.members', UnitMemberController::class)->scoped([
     'member' => 'user_id',

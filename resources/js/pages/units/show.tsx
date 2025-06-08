@@ -1,11 +1,13 @@
 import HeadingSmall from '@/components/heading-small';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import { MembersList } from '@/components/units/members-list';
 import { useInitials } from '@/hooks/use-initials';
 import AppLayout from '@/layouts/app-layout';
 import { SharedData, Unit, type BreadcrumbItem } from '@/types';
-import { Head, usePage } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { AvatarFallback } from '@radix-ui/react-avatar';
+import { TableCellsMerge } from 'lucide-react';
 import moment from 'moment';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -63,6 +65,12 @@ export default function Show() {
                             </div>
                         </div>
                         <div className="space-y-4">
+                            <Button asChild>
+                                <Link href={route('units.orbat', { unit: unit.slug })}>
+                                    <TableCellsMerge />
+                                    ORBAT
+                                </Link>
+                            </Button>
                             <MembersList unit={unit} />
                         </div>
                     </div>

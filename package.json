@@ -57,6 +57,7 @@
         "tailwind-merge": "^3.0.1",
         "tailwindcss": "^4.0.0",
         "tailwindcss-animate": "^1.0.7",
+        "treeflex": "^2.0.1",
         "typescript": "^5.7.2",
         "vite": "^6.0"
     },
