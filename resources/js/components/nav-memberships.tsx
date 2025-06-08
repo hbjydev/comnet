@@ -1,12 +1,12 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import { useInitials } from '@/hooks/use-initials';
+import { MemberRoleLabel } from '@/lib/utils';
 import { type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { useInitials } from '@/hooks/use-initials';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@radix-ui/react-collapsible';
 import { ChevronDownIcon, LayoutDashboard, Plus, Users } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { MemberRoleLabel } from '@/lib/utils';
 
 export function NavMemberships() {
     const initials = useInitials();
@@ -18,11 +18,11 @@ export function NavMemberships() {
         <SidebarGroup className="px-2 py-0">
             <SidebarMenu>
                 <SidebarGroupLabel>
-                    <div className="w-full flex items-center justify-between">
+                    <div className="flex w-full items-center justify-between">
                         <span>Your Units</span>
                         <Button size="sm" variant="outline" asChild>
                             <Link href={route('units.create')}>
-                            <Plus className="h-6" /> Create
+                                <Plus className="h-6" /> Create
                             </Link>
                         </Button>
                     </div>
@@ -33,14 +33,14 @@ export function NavMemberships() {
                         const path = `/units/${item.unit.slug}${route}`;
                         if (exact) return page.url == path;
                         page.url.startsWith(path);
-                    }
+                    };
                     return (
                         <Collapsible defaultOpen={active} className="group/collapsible" key={key}>
                             <SidebarGroup>
                                 <SidebarGroupLabel asChild>
                                     <CollapsibleTrigger asChild>
                                         <Button variant="ghost" className="h-10">
-                                            <div className="flex gap-x-2 items-center text-sidebar-primary">
+                                            <div className="flex items-center gap-x-2 text-sidebar-primary">
                                                 <Avatar>
                                                     <AvatarImage src={item.unit.avatar} />
                                                     <AvatarFallback>{initials(item.unit.display_name)}</AvatarFallback>
@@ -57,7 +57,11 @@ export function NavMemberships() {
                                 <CollapsibleContent>
                                     <SidebarGroupContent className="mt-4">
                                         <SidebarMenuItem>
-                                            <SidebarMenuButton asChild isActive={activeRoute('', true)} tooltip={{ children: item.unit.display_name }}>
+                                            <SidebarMenuButton
+                                                asChild
+                                                isActive={activeRoute('', true)}
+                                                tooltip={{ children: item.unit.display_name }}
+                                            >
                                                 <Link href={route('units.show', { unit: item.unit.slug })} prefetch>
                                                     <LayoutDashboard />
                                                     Dashboard
@@ -66,7 +70,11 @@ export function NavMemberships() {
                                         </SidebarMenuItem>
 
                                         <SidebarMenuItem>
-                                            <SidebarMenuButton asChild isActive={activeRoute('/members')} tooltip={{ children: item.unit.display_name }}>
+                                            <SidebarMenuButton
+                                                asChild
+                                                isActive={activeRoute('/members')}
+                                                tooltip={{ children: item.unit.display_name }}
+                                            >
                                                 <Link href={route('units.members.index', { unit: item.unit.slug })} prefetch>
                                                     <Users />
                                                     Members

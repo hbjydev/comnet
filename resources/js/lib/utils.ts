@@ -21,4 +21,4 @@ export const formatName = (rank: string, ...options: (string | undefined)[]) => 
         }
     }
     return `${rank}. ${name}`;
-}
+};

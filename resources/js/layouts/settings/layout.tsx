@@ -1,5 +1,4 @@
 import Heading from '@/components/heading';
-import { Icon } from '@/components/icon';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';

@@ -1,8 +1,8 @@
-import HeadingSmall from "@/components/heading-small";
-import AppLayout from "@/layouts/app-layout";
-import SettingsLayout from "@/layouts/settings/layout";
-import { BreadcrumbItem, SharedDataAuthed } from "@/types";
-import { Head, usePage } from "@inertiajs/react";
+import HeadingSmall from '@/components/heading-small';
+import AppLayout from '@/layouts/app-layout';
+import SettingsLayout from '@/layouts/settings/layout';
+import { BreadcrumbItem, SharedDataAuthed } from '@/types';
+import { Head, usePage } from '@inertiajs/react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -25,5 +25,4 @@ export default function Developer() {
             </SettingsLayout>
         </AppLayout>
     );
-
 }

@@ -4,7 +4,15 @@ import AppLayout from '@/layouts/app-layout';
 import { formatName, MemberRoleLabel } from '@/lib/utils';
 import { Paginator, SharedData, Unit, UnitMember, UnitRank, UnitSlot, User, type BreadcrumbItem } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
-import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
+import {
+    flexRender,
+    getCoreRowModel,
+    getFilteredRowModel,
+    getPaginationRowModel,
+    getSortedRowModel,
+    useReactTable,
+    type ColumnDef,
+} from '@tanstack/react-table';
 import { Pencil, Trash } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -14,35 +22,33 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-type HydratedMember = UnitMember & { rank: UnitRank; slot?: UnitSlot; user: User; };
+type HydratedMember = UnitMember & { rank: UnitRank; slot?: UnitSlot; user: User };
 
 export const columns = (unitSlug: string): ColumnDef<HydratedMember>[] => [
     {
         id: 'name',
-        accessorFn: row => formatName(row.rank.short_name, row.display_name, row.user.display_name, row.user.username),
-        header: "Name",
+        accessorFn: (row) => formatName(row.rank.short_name, row.display_name, row.user.display_name, row.user.username),
+        header: 'Name',
         cell: ({ row }) => (
             <div className="font-semibold underline">
-                <Link href={route('units.members.show', { unit: unitSlug, member: row.original.user_id })}>
-                    {row.getValue('name')}
-                </Link>
+                <Link href={route('units.members.show', { unit: unitSlug, member: row.original.user_id })}>{row.getValue('name')}</Link>
             </div>
         ),
     },
     {
-        accessorFn: row => row.rank.display_name,
+        accessorFn: (row) => row.rank.display_name,
         header: 'Rank',
     },
     {
-        accessorFn: row => row.slot ? row.slot.display_name : 'Unassigned',
+        accessorFn: (row) => (row.slot ? row.slot.display_name : 'Unassigned'),
         header: 'Slot',
     },
     {
-        accessorFn: row => MemberRoleLabel[row.role],
+        accessorFn: (row) => MemberRoleLabel[row.role],
         header: 'Role',
     },
     {
-        accessorFn: row => new Date(row.created_at).toLocaleDateString(),
+        accessorFn: (row) => new Date(row.created_at).toLocaleDateString(),
         header: 'Date Joined',
     },
     {
@@ -66,10 +72,12 @@ export const columns = (unitSlug: string): ColumnDef<HydratedMember>[] => [
 ];
 
 export default function Members() {
-    const { unit, members } = usePage<SharedData & {
-        unit: Unit;
-        members: Paginator<HydratedMember>;
-    }>().props;
+    const { unit, members } = usePage<
+        SharedData & {
+            unit: Unit;
+            members: Paginator<HydratedMember>;
+        }
+    >().props;
 
     const table = useReactTable({
         data: members.data,
@@ -81,19 +89,21 @@ export default function Members() {
     });
 
     return (
-        <AppLayout breadcrumbs={[
-            ...breadcrumbs,
-            {
-                title: unit.display_name,
-                href: `/units/${unit.slug}`,
-            },
-            {
-                title: 'Members',
-                href: `/units/${unit.slug}/members`,
-            },
-        ]}>
+        <AppLayout
+            breadcrumbs={[
+                ...breadcrumbs,
+                {
+                    title: unit.display_name,
+                    href: `/units/${unit.slug}`,
+                },
+                {
+                    title: 'Members',
+                    href: `/units/${unit.slug}/members`,
+                },
+            ]}
+        >
             <Head title="Members" />
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl overflow-x-auto">
+            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
@@ -101,14 +111,9 @@ export default function Members() {
                                 {headerGroup.headers.map((header) => {
                                     return (
                                         <TableHead key={header.id} className="first:pl-4">
-                                            {header.isPlaceholder
-                                                ? null
-                                                : flexRender(
-                                                    header.column.columnDef.header,
-                                                    header.getContext()
-                                                )}
+                                            {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                                         </TableHead>
-                                    )
+                                    );
                                 })}
                             </TableRow>
                         ))}
@@ -117,30 +122,21 @@ export default function Members() {
                     <TableBody>
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
-                                <TableRow
-                                    key={row.id}
-                                    data-state={row.getIsSelected() && "selected"}
-                                >
+                                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id} className="first:pl-4">
-                                            {flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext()
-                                            )}
+                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </TableCell>
                                     ))}
                                 </TableRow>
                             ))
                         ) : (
-                                <TableRow>
-                                    <TableCell
-                                        colSpan={columns.length}
-                                        className="h-24 text-center"
-                                    >
-                                        No results.
-                                    </TableCell>
-                                </TableRow>
-                            )}
+                            <TableRow>
+                                <TableCell colSpan={columns.length} className="h-24 text-center">
+                                    No results.
+                                </TableCell>
+                            </TableRow>
+                        )}
                     </TableBody>
                 </Table>
             </div>

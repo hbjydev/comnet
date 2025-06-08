@@ -1,14 +1,13 @@
-import { Paginator, Unit, UnitMember, UnitRank, User } from "@/types";
+import { useInitials } from '@/hooks/use-initials';
+import { formatName } from '@/lib/utils';
+import { Paginator, Unit, UnitMember, UnitRank, User } from '@/types';
+import { Link } from '@inertiajs/react';
 import { useQuery } from '@tanstack/react-query';
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Badge } from "../ui/badge";
-import { Skeleton } from "../ui/skeleton";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { useInitials } from "@/hooks/use-initials";
-import moment from "moment";
-import { Button } from "../ui/button";
-import { Link } from "@inertiajs/react";
-import { formatName } from "@/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Skeleton } from '../ui/skeleton';
 
 type HydratedMember = UnitMember & {
     user: User;
@@ -19,11 +18,13 @@ export const MembersList = ({ unit }: { unit: Unit }) => {
     const { data, isLoading } = useQuery<{ data: Paginator<HydratedMember> }>({
         queryKey: ['unit', unit.slug, 'members'],
         queryFn: async () => {
-            const resp = await fetch(route('api.unit.members', {
-                unit: unit.slug,
-                per_page: 5,
-            }));
-            return await resp.json() as { data: Paginator<HydratedMember> };
+            const resp = await fetch(
+                route('api.unit.members', {
+                    unit: unit.slug,
+                    per_page: 5,
+                }),
+            );
+            return (await resp.json()) as { data: Paginator<HydratedMember> };
         },
     });
 
@@ -36,9 +37,7 @@ export const MembersList = ({ unit }: { unit: Unit }) => {
                         <Badge>{data ? data.data.total : 0}</Badge>
                     </div>
                     <Button size="sm" variant="link" asChild>
-                        <Link href={route('units.members.index', { unit: unit.slug })}>
-                            View all
-                        </Link>
+                        <Link href={route('units.members.index', { unit: unit.slug })}>View all</Link>
                     </Button>
                 </CardTitle>
             </CardHeader>
@@ -53,7 +52,9 @@ export const MembersList = ({ unit }: { unit: Unit }) => {
                             </div>
                         </div>
                     ))
-                ): <MembersListItems members={data?.data.data!} />}
+                ) : (
+                    <MembersListItems members={data?.data.data!} />
+                )}
             </CardContent>
         </Card>
     );
@@ -69,9 +70,11 @@ export const MembersListItems = ({ members }: { members: HydratedMember[] }) => 
                 <AvatarFallback>{initials(member.display_name ?? member.user.display_name ?? member.user.username)}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col gap-x-1">
-                <span className="text-semibold">{formatName(member.rank.short_name, member.display_name, member.user.display_name, member.user.username)}</span>
+                <span className="text-semibold">
+                    {formatName(member.rank.short_name, member.display_name, member.user.display_name, member.user.username)}
+                </span>
                 <span className="text-semibold text-muted-foreground">Member since {new Date(member.created_at).toLocaleDateString()}</span>
             </div>
         </div>
     ));
-}
+};

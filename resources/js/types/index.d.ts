@@ -34,7 +34,7 @@ export interface SharedData {
 
 export type SharedDataAuthed = SharedData & {
     auth: Required<Auth>;
-}
+};
 
 export interface User {
     id: string;

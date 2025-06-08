@@ -1,14 +1,14 @@
-import InputError from '@/components/input-error';
 import Heading from '@/components/heading';
-import { Input, InputDescription } from '@/components/ui/input';
+import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
+import { Input, InputDescription } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler, useState } from 'react';
-import { Textarea } from '@/components/ui/textarea';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -32,18 +32,19 @@ const slugify = (str: string) => {
     str = str.toLowerCase();
 
     // remove accents, swap ñ for n, etc
-    var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
-    var to   = "aaaaeeeeiiiioooouuuunc------";
-    for (var i=0, l=from.length ; i<l ; i++) {
+    const from = 'àáäâèéëêìíïîòóöôùúüûñç·/_,:;';
+    const to = 'aaaaeeeeiiiioooouuuunc------';
+    for (let i = 0, l = from.length; i < l; i++) {
         str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
     }
 
-    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+    str = str
+        .replace(/[^a-z0-9 -]/g, '') // remove invalid chars
         .replace(/\s+/g, '-') // collapse whitespace and replace by -
         .replace(/-+/g, '-'); // collapse dashes
 
     return str;
-}
+};
 
 export default function Show() {
     const [slugChanged, setSlugChanged] = useState(false);
@@ -62,7 +63,7 @@ export default function Show() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Create a unit" />
 
-            <div className="p-4 flex flex-col gap-y-4 max-w-screen-md mx-auto">
+            <div className="mx-auto flex max-w-screen-md flex-col gap-y-4 p-4">
                 <Heading title="Create a new unit" description="Become the unit leader your mother never wanted you to be." />
 
                 <form className="flex flex-col gap-6" onSubmit={submit}>
@@ -76,7 +77,7 @@ export default function Show() {
                                 autoFocus
                                 value={data.display_name}
                                 onChange={(e) => {
-                                    setData('display_name', e.target.value)
+                                    setData('display_name', e.target.value);
                                     if (!slugChanged) setData('slug', slugify(e.target.value));
                                 }}
                                 disabled={processing}
@@ -93,13 +94,18 @@ export default function Show() {
                                 required
                                 value={data.slug}
                                 onChange={(e) => {
-                                    setData('slug', e.target.value)
+                                    setData('slug', e.target.value);
                                     setSlugChanged(true);
                                 }}
                                 disabled={processing}
                                 placeholder="pmcalleyoop"
                             />
-                            <InputDescription>Your unit's homepage will be available at <span>/users/<span className="font-bold">{data.slug}</span></span></InputDescription>
+                            <InputDescription>
+                                Your unit's homepage will be available at{' '}
+                                <span>
+                                    /users/<span className="font-bold">{data.slug}</span>
+                                </span>
+                            </InputDescription>
                             <InputError message={errors.slug} className="mt-2" />
                         </div>
 
@@ -123,5 +129,5 @@ export default function Show() {
                 </form>
             </div>
         </AppLayout>
-    )
+    );
 }

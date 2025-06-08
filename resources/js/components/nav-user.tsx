@@ -4,7 +4,7 @@ import { UserInfo } from '@/components/user-info';
 import { UserMenuContent } from '@/components/user-menu-content';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { type SharedData } from '@/types';
-import { usePage, Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { ChevronsUpDown } from 'lucide-react';
 import { Button } from './ui/button';
 
@@ -13,18 +13,19 @@ export function NavUser() {
     const { state } = useSidebar();
     const isMobile = useIsMobile();
 
-    if (!auth.user) return (
-        <SidebarMenu>
-            <SidebarMenuItem className="flex items-center gap-x-2">
-                <Button size="lg" className="w-full" asChild>
-                    <Link href={route('login')}>Log in</Link>
-                </Button>
-                <Button size="lg" variant="secondary" className="w-full" asChild>
-                    <Link href={route('register')}>Sign up</Link>
-                </Button>
-            </SidebarMenuItem>
-        </SidebarMenu>
-    );
+    if (!auth.user)
+        return (
+            <SidebarMenu>
+                <SidebarMenuItem className="flex items-center gap-x-2">
+                    <Button size="lg" className="w-full" asChild>
+                        <Link href={route('login')}>Log in</Link>
+                    </Button>
+                    <Button size="lg" variant="secondary" className="w-full" asChild>
+                        <Link href={route('register')}>Sign up</Link>
+                    </Button>
+                </SidebarMenuItem>
+            </SidebarMenu>
+        );
 
     return (
         <SidebarMenu>

@@ -22,26 +22,29 @@ export default function Show() {
     const unitCreated = moment(unit.created_at);
 
     return (
-        <AppLayout breadcrumbs={[...breadcrumbs, {
-            title: unit.display_name,
-            href: `/units/${unit.slug}`
-        }]}>
+        <AppLayout
+            breadcrumbs={[
+                ...breadcrumbs,
+                {
+                    title: unit.display_name,
+                    href: `/units/${unit.slug}`,
+                },
+            ]}
+        >
             <Head title={unit.display_name} />
 
-            {
-                unit.banner
-                    ? <img className="bg-secondary h-48" src={unit.banner} alt={unit.display_name} />
-                    : (
-                        <div className="h-48 bg-secondary flex items-center justify-center">
-                            <h2 className="text-3xl text-muted-foreground font-semibold tracking-tight">{unit.display_name} has no banner</h2>
-                        </div>
-                    )
-            }
+            {unit.banner ? (
+                <img className="h-48 bg-secondary" src={unit.banner} alt={unit.display_name} />
+            ) : (
+                <div className="flex h-48 items-center justify-center bg-secondary">
+                    <h2 className="text-3xl font-semibold tracking-tight text-muted-foreground">{unit.display_name} has no banner</h2>
+                </div>
+            )}
 
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto items-center">
-                <div className="max-w-screen-xl w-full flex flex-col gap-4 h-4">
+            <div className="flex h-full flex-1 flex-col items-center gap-4 overflow-x-auto rounded-xl p-4">
+                <div className="flex h-4 w-full max-w-screen-xl flex-col gap-4">
                     <div className="flex items-center gap-x-4">
-                        <Avatar className="w-12 h-12 bg-secondary flex items-center justify-center">
+                        <Avatar className="flex h-12 w-12 items-center justify-center bg-secondary">
                             <AvatarImage src={unit.avatar} />
                             <AvatarFallback>{initials(unit.display_name)}</AvatarFallback>
                         </Avatar>
@@ -51,14 +54,13 @@ export default function Show() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 xl:grid-cols-[auto_25rem] gap-4">
+                    <div className="grid grid-cols-1 gap-4 xl:grid-cols-[auto_25rem]">
                         <div className="space-y-4 pt-2">
                             <div className="flex flex-col gap-y-4">
                                 <HeadingSmall title="Description" />
 
                                 {unit.description}
                             </div>
-
                         </div>
                         <div className="space-y-4">
                             <MembersList unit={unit} />
