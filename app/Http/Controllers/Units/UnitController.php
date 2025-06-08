@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
 use App\Models\Unit;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -15,9 +15,10 @@ class UnitController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $units = Unit::paginate(25);
+        $units = Unit::withCount(['members', 'sections', 'ranks'])
+            ->paginate($request->get('per_page'));
 
         return Inertia::render('units/index', [
             'units' => $units,
@@ -52,6 +53,14 @@ class UnitController extends Controller
      * Display the specified resource.
      */
     public function show(Unit $unit): Response
+    {
+        return Inertia::render('units/show', ['unit' => $unit]);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function edit(Unit $unit): Response
     {
         return Inertia::render('units/show', ['unit' => $unit]);
     }

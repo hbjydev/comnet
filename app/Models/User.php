@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Casts\UploadedFile;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -27,6 +28,10 @@ class User extends Authenticatable implements OAuthenticatable
         'username',
         'email',
         'password',
+    ];
+
+    protected $casts = [
+        'avatar' => UploadedFile::class,
     ];
 
     /**

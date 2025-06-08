@@ -90,6 +90,9 @@ export interface Unit {
     slug: string;
     avatar?: string;
     banner?: string;
+    members_count?: number;
+    ranks_count?: number;
+    sections_count?: number;
     created_at: string;
     updated_at: string;
 }

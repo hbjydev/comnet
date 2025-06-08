@@ -20,6 +20,8 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 type ProfileForm = {
+    _method: 'patch';
+    avatar: File;
     username: string;
     display_name?: string;
     email: string;
@@ -28,7 +30,9 @@ type ProfileForm = {
 export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: boolean; status?: string }) {
     const { auth } = usePage<SharedDataAuthed>().props;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
+        _method: 'patch',
+        avatar: new File([], 'blank.png'),
         username: auth.user.username,
         display_name: auth.user.display_name ?? '',
         email: auth.user.email,
@@ -36,8 +40,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-
-        patch(route('profile.update'), {
+        post(route('profile.update'), {
             preserveScroll: true,
         });
     };
@@ -51,6 +54,17 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                     <HeadingSmall title="Profile information" description="Update your name and email address" />
 
                     <form onSubmit={submit} className="space-y-6">
+                        <div className="grid gap-2">
+                            <Label htmlFor="avatar">Avatar</Label>
+                            <Input
+                                id="avatar"
+                                type="file"
+                                className="mt-1 block w-full"
+                                onChange={(e) => setData('avatar', e.target.files![0])}
+                            />
+                            <InputError className="mt-2" message={errors.avatar} />
+                        </div>
+
                         <div className="grid gap-2">
                             <Label htmlFor="username">Username</Label>
 
