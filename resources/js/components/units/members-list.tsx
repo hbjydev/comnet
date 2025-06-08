@@ -53,7 +53,7 @@ export const MembersList = ({ unit }: { unit: Unit }) => {
                         </div>
                     ))
                 ) : (
-                    <MembersListItems members={data?.data.data!} />
+                    <MembersListItems members={(data ?? { data: { data: [] } }).data.data!} />
                 )}
             </CardContent>
         </Card>

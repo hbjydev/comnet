@@ -96,7 +96,7 @@ export interface PaginatorLink {
     active: boolean;
 }
 
-export interface Paginator<T = {}> {
+export interface Paginator<T> {
     current_page: number;
     data: T[];
     first_page_url: string;
