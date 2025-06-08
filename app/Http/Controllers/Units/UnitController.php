@@ -64,7 +64,7 @@ class UnitController extends Controller
     {
         if ($user = $request->user()) {
             if ($user->can('update', $unit)) {
-                return Inertia::render('units/edit', ['unit' => $unit]);
+                return Inertia::render('units/settings/profile', ['unit' => $unit]);
             }
         }
         return abort(403);
@@ -75,7 +75,20 @@ class UnitController extends Controller
      */
     public function update(UpdateUnitRequest $request, Unit $unit)
     {
-        //
+        $data = $request->validated();
+
+        $avatar = $request->file('avatar')->store('unit/avatar');
+        $banner = $request->file('banner')->store('unit/banner');
+
+        $unit->fill([
+            ...$data,
+            'avatar' => $avatar,
+            'banner' => $banner,
+        ]);
+
+        $unit->save();
+
+        return to_route('units.edit', ['unit' => $unit->slug]);
     }
 
     /**

@@ -2,18 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Unit;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUnitRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,7 +15,10 @@ class UpdateUnitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'avatar' => ['nullable', 'image'],
+            'banner' => ['nullable', 'image'],
+            'display_name' => ['string', 'required', 'max:64'],
+            'description' => ['string', 'nullable'],
         ];
     }
 }
