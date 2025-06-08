@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UnitMember extends Model
 {
     /** @use HasFactory<\Database\Factories\UnitMemberFactory> */
-    use HasUlids, HasFactory;
+    use HasFactory, HasUlids;
 
     protected $fillable = [
         'unit_id',

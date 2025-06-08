@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
 use App\Models\Unit;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -30,9 +28,10 @@ class UnitController extends Controller
 
     public function create()
     {
-        if (!Gate::check('create', Unit::class)) {
+        if (! Gate::check('create', Unit::class)) {
             return to_route('login');
-        };
+        }
+
         return Inertia::render('units/create');
     }
 
@@ -73,6 +72,7 @@ class UnitController extends Controller
                 return Inertia::render('units/settings/profile', ['unit' => $unit]);
             }
         }
+
         return abort(403);
     }
 

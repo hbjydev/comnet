@@ -10,20 +10,23 @@ use Laravel\Socialite\Facades\Socialite;
 
 class OAuthController extends Controller
 {
-    function discordRedirect() {
+    public function discordRedirect()
+    {
         return Socialite::driver('discord')->redirect();
     }
 
-    function discordCallback() {
+    public function discordCallback()
+    {
         $discordUser = Socialite::driver('discord')->user();
         if ($user = User::where('discord_id', $discordUser->id)->first()) {
             Auth::login($user);
+
             return to_route('dashboard');
         }
 
         $url = $discordUser->avatar;
         $contents = file_get_contents($url);
-        $avatarPath = 'user/avatar/' . $discordUser->id;
+        $avatarPath = 'user/avatar/'.$discordUser->id;
         Storage::put($avatarPath, $contents);
 
         $user = User::create([

@@ -18,6 +18,7 @@ class UploadedFile implements CastsAttributes
         if ($attributes[$key]) {
             return Storage::url($value);
         }
+
         return $value;
     }
 

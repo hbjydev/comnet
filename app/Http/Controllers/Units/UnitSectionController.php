@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Units;
 
 use App\Http\Controllers\Controller;
 use App\Models\Unit;
-use App\Models\UnitMember;
 use App\Models\UnitSection;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
