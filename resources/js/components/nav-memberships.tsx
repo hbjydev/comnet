@@ -72,8 +72,8 @@ export function NavMemberships() {
                                         <SidebarMenuItem>
                                             <SidebarMenuButton
                                                 asChild
-                                                isActive={activeRoute('/members')}
-                                                tooltip={{ children: 'Members' }}
+                                                isActive={activeRoute('/structure')}
+                                                tooltip={{ children: 'Structure' }}
                                             >
                                                 <Link href={route('units.sections.index', { unit: item.unit.slug })} prefetch>
                                                     <Columns3 />
