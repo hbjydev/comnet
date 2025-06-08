@@ -45,7 +45,17 @@ export default function Edit() {
     };
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <AppLayout breadcrumbs={[
+            ...breadcrumbs,
+            {
+                title: unit.display_name,
+                href: `/units/${unit.slug}`,
+            },
+            {
+                title: 'Settings',
+                href: `/units/${unit.slug}/edit`,
+            },
+        ]}>
             <Head title={unit.display_name} />
             <UnitSettingsLayout>
                 <div className="space-y-6">

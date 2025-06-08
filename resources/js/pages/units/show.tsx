@@ -86,7 +86,7 @@ export default function Show() {
                                     </Link>
                                 </Button>
                                 {canOpenAdmin && <Button asChild>
-                                    <Link href={route('units.orbat', { unit: unit.slug })}>
+                                    <Link href={route('units.edit', { unit: unit.slug })}>
                                         <Cog />
                                         Admin
                                         <ExternalLink />
