@@ -26,9 +26,10 @@ class UnitPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(?User $user): bool
     {
-        return true;
+        if ($user != null) return true;
+        return false;
     }
 
     /**
@@ -46,7 +47,9 @@ class UnitPolicy
      */
     public function delete(User $user, Unit $unit): bool
     {
-        return false;
+        $member = $unit->members()->where('user_id', $user->id)->first();
+        if (!$member) return false;
+        return $member->role == 'owner';
     }
 
     /**

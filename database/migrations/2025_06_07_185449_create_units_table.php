@@ -51,16 +51,16 @@ return new class extends Migration
         });
 
         Schema::create('unit_members', function (Blueprint $table) {
+            $table->ulid('id')->primary();
             $table->foreignUlid('unit_id');
-            $table->foreignUlid('user_id');
+            $table->foreignUlid('user_id')->nullable();
             $table->string('display_name')->nullable();
             $table->enum('role', ['owner', 'admin', 'normal', 'banned'])->default('normal');
             $table->jsonb('profile_data')->default('{}');
             $table->foreignUlid('rank_id')->unique();
             $table->foreignUlid('slot_id')->unique()->nullable();
             $table->timestamps();
-
-            $table->primary(['unit_id', 'user_id']);
+            $table->unique(['unit_id', 'user_id']);
         });
     }
 
