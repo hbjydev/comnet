@@ -102,6 +102,23 @@ class UnitController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function ranks(Unit $unit)
+    {
+        return Inertia::render('units/orbat', [
+            'unit' => $unit,
+            'ranks' => $unit->ranks,
+            'members' => $unit->members,
+            'sections' => $unit->sections()
+                ->whereNull('unit_section_id')
+                ->with('slots')
+                ->with('sections')
+                ->get(),
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
     public function orbat(Unit $unit)
     {
         return Inertia::render('units/orbat', [

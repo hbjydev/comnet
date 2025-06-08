@@ -29,7 +29,15 @@ export function NavMemberships() {
                 </SidebarGroupLabel>
                 {props.auth.memberships.map((item, key) => {
                     const active = page.url.startsWith(`/units/${item.unit.slug}`);
-                    const activeRoute = (route: string, exact: boolean = false) => {
+                    const activeRoute = (route: string | string[], exact: boolean = false) => {
+                        if (Array.isArray(route)) {
+                            for (const currentRoute of route) {
+                                const path = `/units/${item.unit.slug}${currentRoute}`;
+                                if (exact && page.url == path) return true;
+                                if (page.url.startsWith(path)) return true;
+                            }
+                            return false;
+                        }
                         const path = `/units/${item.unit.slug}${route}`;
                         if (exact) return page.url == path;
                         return page.url.startsWith(path);
@@ -72,10 +80,13 @@ export function NavMemberships() {
                                         <SidebarMenuItem>
                                             <SidebarMenuButton
                                                 asChild
-                                                isActive={activeRoute('/structure')}
+                                                isActive={activeRoute([
+                                                    '/ranks',
+                                                    '/sections',
+                                                ])}
                                                 tooltip={{ children: 'Structure' }}
                                             >
-                                                <Link href={route('units.sections.index', { unit: item.unit.slug })} prefetch>
+                                                <Link href={route('units.ranks.index', { unit: item.unit.slug })} prefetch>
                                                     <Columns3 />
                                                     Structure
                                                 </Link>

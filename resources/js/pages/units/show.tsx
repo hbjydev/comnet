@@ -76,7 +76,7 @@ export default function Show() {
                                     </Link>
                                 </Button>
                                 <Button asChild>
-                                    <Link href={route('units.orbat', { unit: unit.slug })}>
+                                    <Link href={route('units.ranks.index', { unit: unit.slug })}>
                                         <Columns3 />
                                         Structure
                                         <ExternalLink />
