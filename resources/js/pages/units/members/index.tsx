@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
-import { formatName } from '@/lib/utils';
+import { formatName, MemberRoleLabel } from '@/lib/utils';
 import { Paginator, SharedData, Unit, UnitMember, UnitRank, UnitSlot, User, type BreadcrumbItem } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
@@ -35,6 +35,10 @@ export const columns = (unitSlug: string): ColumnDef<HydratedMember>[] => [
     },
     {
         accessorFn: row => row.slot ? row.slot.display_name : 'Unassigned',
+        header: 'Slot',
+    },
+    {
+        accessorFn: row => MemberRoleLabel[row.role],
         header: 'Role',
     },
     {
