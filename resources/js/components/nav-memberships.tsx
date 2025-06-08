@@ -17,7 +17,7 @@ export function NavMemberships() {
     return (
         <SidebarGroup className="px-2 py-0">
             <SidebarMenu>
-                <SidebarGroupLabel>
+                <SidebarGroupLabel className="pr-0">
                     <div className="flex w-full items-center justify-between">
                         <span>Your Units</span>
                         <Button size="sm" variant="outline" asChild>
