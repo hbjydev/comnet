@@ -105,7 +105,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
             </form>
 
             <Button asChild className="w-full bg-[#5865F2] dark:bg-[#454FBF] dark:text-white">
-                <a href="/auth/discord/redirect">
+                <a href={route('oauth.discord')}>
                     Log in with Discord
                 </a>
             </Button>
