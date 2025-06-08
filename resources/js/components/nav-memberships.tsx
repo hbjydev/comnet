@@ -88,7 +88,7 @@ export function NavMemberships() {
                                                 isActive={activeRoute('/orbat')}
                                                 tooltip={{ children: item.unit.display_name }}
                                             >
-                                                <Link href={route('units.members.orbat', { unit: item.unit.slug })} prefetch>
+                                                <Link href={route('units.orbat', { unit: item.unit.slug })} prefetch>
                                                     <Users />
                                                     ORBAT
                                                 </Link>
