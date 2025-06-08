@@ -19,7 +19,11 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Show() {
     const initials = useInitials();
-    const { unit } = usePage<SharedData & { unit: Unit }>().props;
+    const { unit, auth: { memberships } } = usePage<SharedData & { unit: Unit }>().props;
+
+    const canOpenAdmin = memberships.find(
+        v => v.unit_id == unit.id && ["owner", "admin"].includes(v.role)
+    )
 
     const unitCreated = moment(unit.created_at);
 
@@ -81,13 +85,13 @@ export default function Show() {
                                         <ExternalLink />
                                     </Link>
                                 </Button>
-                                <Button asChild>
+                                {canOpenAdmin && <Button asChild>
                                     <Link href={route('units.orbat', { unit: unit.slug })}>
                                         <Cog />
                                         Admin
                                         <ExternalLink />
                                     </Link>
-                                </Button>
+                                </Button>}
                             </div>
 
                             <MembersList unit={unit} />
