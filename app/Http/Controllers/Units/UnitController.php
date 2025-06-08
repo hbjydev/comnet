@@ -60,9 +60,14 @@ class UnitController extends Controller
     /**
      * Display the specified resource.
      */
-    public function edit(Unit $unit): Response
+    public function edit(Request $request, Unit $unit): Response
     {
-        return Inertia::render('units/show', ['unit' => $unit]);
+        if ($user = $request->user()) {
+            if ($user->can('update', $unit)) {
+                return Inertia::render('units/edit', ['unit' => $unit]);
+            }
+        }
+        return abort(403);
     }
 
     /**

@@ -36,8 +36,8 @@ class UnitPolicy
      */
     public function update(User $user, Unit $unit): bool
     {
-        $member = $unit->members()->where('user_id', $user->id)->firstOrFail();
-
+        $member = $unit->members()->where('user_id', $user->id)->first();
+        if (!$member) return false;
         return in_array($member->role, ['owner', 'admin']);
     }
 
