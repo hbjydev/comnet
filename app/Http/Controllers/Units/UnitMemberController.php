@@ -19,6 +19,7 @@ class UnitMemberController extends Controller
                 ->with('user')
                 ->with('rank')
                 ->with('slot')
+                ->orderBy('-created_at')
                 ->paginate($request->get('per_page')),
         ]);
     }
