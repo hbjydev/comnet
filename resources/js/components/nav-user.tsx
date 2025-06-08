@@ -15,9 +15,12 @@ export function NavUser() {
 
     if (!auth.user) return (
         <SidebarMenu>
-            <SidebarMenuItem>
+            <SidebarMenuItem className="flex items-center gap-x-2">
                 <Button size="lg" className="w-full" asChild>
-                    <Link href={route('register')}>Create an account</Link>
+                    <Link href={route('login')}>Log in</Link>
+                </Button>
+                <Button size="lg" variant="secondary" className="w-full" asChild>
+                    <Link href={route('register')}>Sign up</Link>
                 </Button>
             </SidebarMenuItem>
         </SidebarMenu>
