@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('display_name');
             $table->string('description')->nullable();
             $table->string('slug', 24)->unique();
+            $table->enum('visibility', ['public', 'unlisted', 'private'])->default('public');
             $table->string('avatar')->nullable();
             $table->string('banner')->nullable();
             $table->timestamps();

@@ -2,6 +2,7 @@
 volumes:
   mailpit_data:
   minio_data:
+  redis_data:
 
 services:
   mailpit:
@@ -42,3 +43,9 @@ services:
         exit 0;
       "
 
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
