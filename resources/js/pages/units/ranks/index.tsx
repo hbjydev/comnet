@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
 import UnitStructureLayout from '@/layouts/units/structure';
-import { Paginator, SharedData, Unit, UnitRank, type BreadcrumbItem } from '@/types';
+import { SharedData, Unit, UnitRank, type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 import {
     flexRender,

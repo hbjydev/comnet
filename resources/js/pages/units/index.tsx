@@ -21,9 +21,12 @@ export default function Units() {
     >().props;
 
     const onPerPageChanged = (val: string) => {
-        router.visit(route('units.index', {
-            per_page: val,
-        }), { preserveState: true })
+        router.visit(
+            route('units.index', {
+                per_page: val,
+            }),
+            { preserveState: true },
+        );
     };
 
     return (
@@ -31,12 +34,12 @@ export default function Units() {
             <Head title="Units" />
 
             <div className="flex items-center justify-between space-x-2 p-4">
-                <div className="text-muted-foreground text-sm">
-                  Showing {units.per_page} of {units.total} units.
+                <div className="text-sm text-muted-foreground">
+                    Showing {units.per_page} of {units.total} units.
                 </div>
                 <div className="flex items-center gap-x-4">
                     <div className="flex items-center gap-x-2">
-                        <span className="text-sm text-muted-foreground w-fit">Per page:</span>
+                        <span className="w-fit text-sm text-muted-foreground">Per page:</span>
                         <Select onValueChange={onPerPageChanged} defaultValue={units.per_page.toString()}>
                             <SelectTrigger className="w-[150px]">
                                 <SelectValue placeholder="Per page" />
@@ -49,30 +52,24 @@ export default function Units() {
                         </Select>
                     </div>
                     <div className="flex items-center">
-                        {
-                            units.links.map((link, idx) => (
-                                <Button
-                                    key={idx}
-                                    variant={link.active ? "secondary" : "outline"}
-                                    size="icon"
-                                    className="rounded-none first:rounded-l-md last:rounded-r-md"
-                                    asChild
-                                >
-                                    <Link href={link.url!}>{
-                                        link.label == "&laquo; Previous"
-                                            ? <ArrowLeft />
-                                            : link.label == "Next &raquo;"
-                                                ? <ArrowRight />
-                                                : link.label
-                                    }</Link>
-                                </Button>
-                            ))
-                        }
+                        {units.links.map((link, idx) => (
+                            <Button
+                                key={idx}
+                                variant={link.active ? 'secondary' : 'outline'}
+                                size="icon"
+                                className="rounded-none first:rounded-l-md last:rounded-r-md"
+                                asChild
+                            >
+                                <Link href={link.url!}>
+                                    {link.label == '&laquo; Previous' ? <ArrowLeft /> : link.label == 'Next &raquo;' ? <ArrowRight /> : link.label}
+                                </Link>
+                            </Button>
+                        ))}
                     </div>
                 </div>
             </div>
 
-            <div className="grid h-full flex-1 grid-cols-1 lg:grid-cols-4 xl:grid-cols-3 gap-4 overflow-x-auto rounded-xl p-4">
+            <div className="grid h-full flex-1 grid-cols-1 gap-4 overflow-x-auto rounded-xl p-4 lg:grid-cols-4 xl:grid-cols-3">
                 {units.data.map((unit, key) => (
                     <UnitCard unit={unit} key={key} />
                 ))}

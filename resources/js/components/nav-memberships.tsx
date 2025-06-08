@@ -65,11 +65,7 @@ export function NavMemberships() {
                                 <CollapsibleContent>
                                     <SidebarGroupContent className="mt-4 space-y-1">
                                         <SidebarMenuItem>
-                                            <SidebarMenuButton
-                                                asChild
-                                                isActive={activeRoute('', true)}
-                                                tooltip={{ children: 'Dashboard' }}
-                                            >
+                                            <SidebarMenuButton asChild isActive={activeRoute('', true)} tooltip={{ children: 'Dashboard' }}>
                                                 <Link href={route('units.show', { unit: item.unit.slug })} prefetch>
                                                     <LayoutDashboard />
                                                     Dashboard
@@ -80,10 +76,7 @@ export function NavMemberships() {
                                         <SidebarMenuItem>
                                             <SidebarMenuButton
                                                 asChild
-                                                isActive={activeRoute([
-                                                    '/ranks',
-                                                    '/sections',
-                                                ])}
+                                                isActive={activeRoute(['/ranks', '/sections'])}
                                                 tooltip={{ children: 'Structure' }}
                                             >
                                                 <Link href={route('units.ranks.index', { unit: item.unit.slug })} prefetch>
@@ -94,11 +87,7 @@ export function NavMemberships() {
                                         </SidebarMenuItem>
 
                                         <SidebarMenuItem>
-                                            <SidebarMenuButton
-                                                asChild
-                                                isActive={activeRoute('/members')}
-                                                tooltip={{ children: 'Members' }}
-                                            >
+                                            <SidebarMenuButton asChild isActive={activeRoute('/members')} tooltip={{ children: 'Members' }}>
                                                 <Link href={route('units.members.index', { unit: item.unit.slug })} prefetch>
                                                     <Users />
                                                     Members
@@ -107,11 +96,7 @@ export function NavMemberships() {
                                         </SidebarMenuItem>
 
                                         <SidebarMenuItem>
-                                            <SidebarMenuButton
-                                                asChild
-                                                isActive={activeRoute('/orbat')}
-                                                tooltip={{ children: 'ORBAT' }}
-                                            >
+                                            <SidebarMenuButton asChild isActive={activeRoute('/orbat')} tooltip={{ children: 'ORBAT' }}>
                                                 <Link href={route('units.orbat', { unit: item.unit.slug })} prefetch>
                                                     <TableCellsMerge />
                                                     ORBAT

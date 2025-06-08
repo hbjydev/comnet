@@ -41,8 +41,8 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
     useEffect(() => {
         if (auth.user.avatar) {
             fetch(auth.user.avatar)
-                .then(v => v.blob())
-                .then(v => setData('avatar', v));
+                .then((v) => v.blob())
+                .then((v) => setData('avatar', v));
         }
     }, []);
 
@@ -64,12 +64,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                     <form onSubmit={submit} className="space-y-6">
                         <div className="grid gap-2">
                             <Label htmlFor="avatar">Avatar</Label>
-                            <Input
-                                id="avatar"
-                                type="file"
-                                className="mt-1 block w-full"
-                                onChange={(e) => setData('avatar', e.target.files![0])}
-                            />
+                            <Input id="avatar" type="file" className="mt-1 block w-full" onChange={(e) => setData('avatar', e.target.files![0])} />
                             <InputError className="mt-2" message={errors.avatar} />
                         </div>
 

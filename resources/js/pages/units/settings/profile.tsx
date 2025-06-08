@@ -40,14 +40,14 @@ export default function Edit() {
     useEffect(() => {
         if (unit.avatar) {
             fetch(unit.avatar)
-                .then(v => v.blob())
-                .then(v => setData('avatar', v));
+                .then((v) => v.blob())
+                .then((v) => setData('avatar', v));
         }
 
         if (unit.banner) {
             fetch(unit.banner)
-                .then(v => v.blob())
-                .then(v => setData('banner', v));
+                .then((v) => v.blob())
+                .then((v) => setData('banner', v));
         }
     }, []);
 
@@ -59,17 +59,19 @@ export default function Edit() {
     };
 
     return (
-        <AppLayout breadcrumbs={[
-            ...breadcrumbs,
-            {
-                title: unit.display_name,
-                href: `/units/${unit.slug}`,
-            },
-            {
-                title: 'Settings',
-                href: `/units/${unit.slug}/edit`,
-            },
-        ]}>
+        <AppLayout
+            breadcrumbs={[
+                ...breadcrumbs,
+                {
+                    title: unit.display_name,
+                    href: `/units/${unit.slug}`,
+                },
+                {
+                    title: 'Settings',
+                    href: `/units/${unit.slug}/edit`,
+                },
+            ]}
+        >
             <Head title={unit.display_name} />
             <UnitSettingsLayout>
                 <div className="space-y-6">
@@ -78,23 +80,13 @@ export default function Edit() {
                     <form onSubmit={submit} className="space-y-6">
                         <div className="grid gap-2">
                             <Label htmlFor="avatar">Avatar</Label>
-                            <Input
-                                id="avatar"
-                                type="file"
-                                className="mt-1 block w-full"
-                                onChange={(e) => setData('avatar', e.target.files![0])}
-                            />
+                            <Input id="avatar" type="file" className="mt-1 block w-full" onChange={(e) => setData('avatar', e.target.files![0])} />
                             <InputError className="mt-2" message={errors.avatar} />
                         </div>
 
                         <div className="grid gap-2">
                             <Label htmlFor="banner">Banner</Label>
-                            <Input
-                                id="banner"
-                                type="file"
-                                className="mt-1 block w-full"
-                                onChange={(e) => setData('banner', e.target.files![0])}
-                            />
+                            <Input id="banner" type="file" className="mt-1 block w-full" onChange={(e) => setData('banner', e.target.files![0])} />
                             <InputError className="mt-2" message={errors.banner} />
                         </div>
 

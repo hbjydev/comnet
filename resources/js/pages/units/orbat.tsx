@@ -1,8 +1,8 @@
-import 'treeflex/dist/css/treeflex.css';
 import { OrbatSection } from '@/components/units/orbat-section';
 import AppLayout from '@/layouts/app-layout';
 import { Unit, UnitSection, type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
+import 'treeflex/dist/css/treeflex.css';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -37,9 +37,7 @@ export default function Show() {
 
             <div className="flex flex-col items-center justify-center">
                 <div className="tf-tree" id="orbat_root">
-                    <ul>
-                        {sectionsMap}
-                    </ul>
+                    <ul>{sectionsMap}</ul>
                 </div>
             </div>
         </AppLayout>

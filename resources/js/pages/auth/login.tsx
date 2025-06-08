@@ -1,4 +1,4 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
@@ -9,7 +9,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
-import { Separator } from '@radix-ui/react-separator';
 
 type LoginForm = {
     username: string;
@@ -90,7 +89,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         <Label htmlFor="remember">Remember me</Label>
                     </div>
 
-                    <Button type="submit" className="w-full mt-4" tabIndex={4} disabled={processing}>
+                    <Button type="submit" className="mt-4 w-full" tabIndex={4} disabled={processing}>
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                         Log in
                     </Button>
@@ -105,9 +104,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
             </form>
 
             <Button asChild className="w-full bg-[#5865F2] dark:bg-[#454FBF] dark:text-white">
-                <a href={route('oauth.discord')}>
-                    Log in with Discord
-                </a>
+                <a href={route('oauth.discord')}>Log in with Discord</a>
             </Button>
 
             {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
