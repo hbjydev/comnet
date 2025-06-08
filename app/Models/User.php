@@ -27,7 +27,10 @@ class User extends Authenticatable implements OAuthenticatable
         'display_name',
         'username',
         'email',
+        'email_verified_at',
         'password',
+        'discord_id',
+        'avatar',
     ];
 
     protected $casts = [

@@ -8,7 +8,11 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -32,6 +36,35 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
+
+    Route::get('auth/discord/redirect', function () {
+        return Socialite::driver('discord')->redirect();
+    });
+    Route::get('auth/discord/callback', function () {
+        $discordUser = Socialite::driver('discord')->user();
+
+        if ($user = User::find('discord_id', $discordUser->id)) {
+            Auth::login($user);
+            return to_route('dashboard');
+        }
+
+        $url = $discordUser->avatar;
+        $contents = file_get_contents($url);
+        $avatarPath = 'user/avatar/' . $discordUser->id;
+        Storage::put($avatarPath, $contents);
+
+        $user = User::create([
+            'username' => $discordUser->name,
+            'avatar' => $avatarPath,
+            'email' => $discordUser->email,
+            'email_verified_at' => now(),
+            'discord_id' => $discordUser->id,
+        ]);
+
+        Auth::login($user);
+
+        return to_route('dashboard');
+    });
 });
 
 Route::middleware('auth')->group(function () {

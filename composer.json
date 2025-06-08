@@ -13,10 +13,12 @@
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/passport": "^13.0",
+        "laravel/socialite": "^5.21",
         "laravel/telescope": "^5.9",
         "laravel/tinker": "^2.10.1",
         "league/flysystem-aws-s3-v3": "^3.29",
         "robinvdvleuten/ulid": "^5.0",
+        "socialiteproviders/discord": "^4.2",
         "tightenco/ziggy": "^2.4"
     },
     "require-dev": {

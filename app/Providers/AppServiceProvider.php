@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
 
@@ -29,5 +30,9 @@ class AppServiceProvider extends ServiceProvider
             'units:read:orbat' => 'Retrieve unit slot & section info.',
             'units:admin' => 'Delete access to your units.',
         ]);
+
+        Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
+            $event->extendSocialite('discord', \SocialiteProviders\Discord\Provider::class);
+        });
     }
 }
