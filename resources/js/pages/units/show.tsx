@@ -36,7 +36,7 @@ export default function Show() {
             <Head title={unit.display_name} />
 
             {unit.banner ? (
-                <img className="h-48 bg-secondary" src={unit.banner} alt={unit.display_name} />
+                <img className="h-48 bg-secondary object-cover" src={unit.banner} alt={unit.display_name} />
             ) : (
                 <div className="flex h-48 items-center justify-center bg-secondary">
                     <h2 className="text-3xl font-semibold tracking-tight text-muted-foreground">{unit.display_name} has no banner</h2>

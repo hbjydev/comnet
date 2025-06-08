@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
 use App\Models\Unit;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -34,7 +35,15 @@ class UnitController extends Controller
     public function store(StoreUnitRequest $request)
     {
         $data = $request->validated();
-        $unit = Unit::create($data);
+
+        $avatar = $request->file('avatar')->store('unit/avatar');
+        $banner = $request->file('banner')->store('unit/banner');
+
+        $unit = Unit::create([
+            ...$data,
+            'avatar' => $avatar,
+            'banner' => $banner,
+        ]);
 
         return to_route('units.show', ['unit' => $unit->slug]);
     }

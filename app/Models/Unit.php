@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\UploadedFile;
 use App\Events\UnitCreated;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,6 +26,11 @@ class Unit extends Model
         'slug',
         'avatar',
         'banner',
+    ];
+
+    protected $casts = [
+        'avatar' => UploadedFile::class,
+        'banner' => UploadedFile::class,
     ];
 
     public function getRouteKeyName()

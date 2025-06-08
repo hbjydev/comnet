@@ -25,6 +25,8 @@ type NewUnitForm = {
     display_name: string;
     slug: string;
     description?: string;
+    avatar?: File;
+    banner?: File;
 };
 
 const slugify = (str: string) => {
@@ -52,6 +54,8 @@ export default function Show() {
         display_name: '',
         slug: '',
         description: '',
+        avatar: new File([], 'blank.png'),
+        banner: new File([], 'blank.png'),
     });
 
     const submit: FormEventHandler = (e) => {
@@ -68,6 +72,32 @@ export default function Show() {
 
                 <form className="flex flex-col gap-6" onSubmit={submit}>
                     <div className="grid gap-6">
+                        <div className="grid gap-2">
+                            <Label htmlFor="avatar">Avatar</Label>
+                            <Input
+                                id="avatar"
+                                type="file"
+                                onChange={(e) => {
+                                    setData('avatar', e.target.files![0]);
+                                }}
+                                disabled={processing}
+                            />
+                            <InputError message={errors.avatar} className="mt-2" />
+                        </div>
+
+                        <div className="grid gap-2">
+                            <Label htmlFor="banner">Banner</Label>
+                            <Input
+                                id="banner"
+                                type="file"
+                                onChange={(e) => {
+                                    setData('banner', e.target.files![0]);
+                                }}
+                                disabled={processing}
+                            />
+                            <InputError message={errors.banner} className="mt-2" />
+                        </div>
+
                         <div className="grid gap-2">
                             <Label htmlFor="display_name">Unit name</Label>
                             <Input

@@ -23,6 +23,8 @@ class StoreUnitRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'avatar' => ['image', 'nullable'],
+            'banner' => ['image', 'nullable'],
             'display_name' => ['string', 'required', 'max:64'],
             'slug' => ['string', 'required', 'lowercase', 'unique:units'],
             'description' => ['string', 'nullable'],
