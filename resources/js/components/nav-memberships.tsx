@@ -15,7 +15,7 @@ export function NavMemberships() {
     if (!props.auth.user) return;
 
     return (
-        <SidebarGroup>
+        <SidebarGroup className="px-0">
             <SidebarMenu>
                 <SidebarGroupLabel>
                     <div className="flex w-full items-center justify-between">
@@ -60,7 +60,7 @@ export function NavMemberships() {
                                             <SidebarMenuButton
                                                 asChild
                                                 isActive={activeRoute('', true)}
-                                                tooltip={{ children: item.unit.display_name }}
+                                                tooltip={{ children: 'Dashboard' }}
                                             >
                                                 <Link href={route('units.show', { unit: item.unit.slug })} prefetch>
                                                     <LayoutDashboard />
@@ -73,7 +73,7 @@ export function NavMemberships() {
                                             <SidebarMenuButton
                                                 asChild
                                                 isActive={activeRoute('/members')}
-                                                tooltip={{ children: item.unit.display_name }}
+                                                tooltip={{ children: 'Members' }}
                                             >
                                                 <Link href={route('units.members.index', { unit: item.unit.slug })} prefetch>
                                                     <Users />
@@ -86,7 +86,7 @@ export function NavMemberships() {
                                             <SidebarMenuButton
                                                 asChild
                                                 isActive={activeRoute('/orbat')}
-                                                tooltip={{ children: item.unit.display_name }}
+                                                tooltip={{ children: 'ORBAT' }}
                                             >
                                                 <Link href={route('units.orbat', { unit: item.unit.slug })} prefetch>
                                                     <TableCellsMerge />
