@@ -8,7 +8,6 @@ import { SharedData, Unit, type BreadcrumbItem } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { AvatarFallback } from '@radix-ui/react-avatar';
 import { Cog, Columns3, ExternalLink, TableCellsMerge } from 'lucide-react';
-import moment from 'moment';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -24,8 +23,6 @@ export default function Show() {
     const canOpenAdmin = memberships.find(
         v => v.unit_id == unit.id && ["owner", "admin"].includes(v.role)
     )
-
-    const unitCreated = moment(unit.created_at);
 
     return (
         <AppLayout
@@ -58,7 +55,7 @@ export default function Show() {
                                 </Avatar>
                                 <div className="space-y-0.5">
                                     <h2 className="text-xl font-semibold tracking-tight">{unit.display_name}</h2>
-                                    <p className="text-sm text-muted-foreground">{`Created at ${unitCreated}`}</p>
+                                    <p className="text-sm text-muted-foreground">{`Created at ${new Date(unit.created_at).toLocaleDateString()}`}</p>
                                 </div>
                             </div>
 
