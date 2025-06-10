@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem } from '@/components/ui/sidebar';
 import { useInitials } from '@/hooks/use-initials';
 import { MemberRoleLabel } from '@/lib/utils';
 import { type SharedData } from '@/types';
@@ -63,47 +63,46 @@ export function NavMemberships() {
                                     </CollapsibleTrigger>
                                 </SidebarGroupLabel>
                                 <CollapsibleContent>
-                                    <SidebarGroupContent className="mt-4 space-y-1">
-                                        <SidebarMenuItem>
-                                            <SidebarMenuButton asChild isActive={activeRoute('', true)} tooltip={{ children: 'Dashboard' }}>
+                                    <SidebarMenuSub className="mt-4 space-y-1">
+                                        <SidebarMenuSubItem>
+                                            <SidebarMenuSubButton asChild isActive={activeRoute('', true)}>
                                                 <Link href={route('units.show', { unit: item.unit.slug })} prefetch>
                                                     <LayoutDashboard />
                                                     Dashboard
                                                 </Link>
-                                            </SidebarMenuButton>
-                                        </SidebarMenuItem>
+                                            </SidebarMenuSubButton>
+                                        </SidebarMenuSubItem>
 
-                                        <SidebarMenuItem>
-                                            <SidebarMenuButton
+                                        <SidebarMenuSubItem>
+                                            <SidebarMenuSubButton
                                                 asChild
                                                 isActive={activeRoute(['/ranks', '/sections'])}
-                                                tooltip={{ children: 'Structure' }}
                                             >
                                                 <Link href={route('units.ranks.index', { unit: item.unit.slug })} prefetch>
                                                     <Columns3 />
                                                     Structure
                                                 </Link>
-                                            </SidebarMenuButton>
-                                        </SidebarMenuItem>
+                                            </SidebarMenuSubButton>
+                                        </SidebarMenuSubItem>
 
-                                        <SidebarMenuItem>
-                                            <SidebarMenuButton asChild isActive={activeRoute('/members')} tooltip={{ children: 'Members' }}>
+                                        <SidebarMenuSubItem>
+                                            <SidebarMenuSubButton asChild isActive={activeRoute('/members')}>
                                                 <Link href={route('units.members.index', { unit: item.unit.slug })} prefetch>
                                                     <Users />
                                                     Members
                                                 </Link>
-                                            </SidebarMenuButton>
-                                        </SidebarMenuItem>
+                                            </SidebarMenuSubButton>
+                                        </SidebarMenuSubItem>
 
-                                        <SidebarMenuItem>
-                                            <SidebarMenuButton asChild isActive={activeRoute('/orbat')} tooltip={{ children: 'ORBAT' }}>
+                                        <SidebarMenuSubItem>
+                                            <SidebarMenuSubButton asChild isActive={activeRoute('/orbat')}>
                                                 <Link href={route('units.orbat', { unit: item.unit.slug })} prefetch>
                                                     <TableCellsMerge />
                                                     ORBAT
                                                 </Link>
-                                            </SidebarMenuButton>
-                                        </SidebarMenuItem>
-                                    </SidebarGroupContent>
+                                            </SidebarMenuSubButton>
+                                        </SidebarMenuSubItem>
+                                    </SidebarMenuSub>
                                 </CollapsibleContent>
                             </SidebarGroup>
                         </Collapsible>
