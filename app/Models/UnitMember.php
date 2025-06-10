@@ -18,8 +18,8 @@ class UnitMember extends Model
         'display_name',
         'role',
         'profile_data',
-        'slot_id',
-        'rank_id',
+        'unit_slot_id',
+        'unit_rank_id',
     ];
 
     public function unit(): BelongsTo
@@ -34,11 +34,11 @@ class UnitMember extends Model
 
     public function rank(): BelongsTo
     {
-        return $this->belongsTo(UnitRank::class);
+        return $this->belongsTo(UnitRank::class, 'unit_rank_id');
     }
 
     public function slot(): BelongsTo
     {
-        return $this->belongsTo(UnitSlot::class);
+        return $this->belongsTo(UnitSlot::class, 'unit_slot_id');
     }
 }

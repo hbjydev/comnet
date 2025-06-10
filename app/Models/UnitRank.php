@@ -18,6 +18,7 @@ class UnitRank extends Model
         'display_name',
         'short_name',
         'icon',
+        'sort_order',
     ];
 
     public function unit(): BelongsTo

@@ -112,12 +112,18 @@ class UnitController extends Controller
     {
         return Inertia::render('units/orbat', [
             'unit' => $unit,
-            'ranks' => $unit->ranks,
             'members' => $unit->members,
-            'sections' => $unit->sections()
+            'ranks' => $unit
+                ->ranks()
+                ->withTotals(['members'])
+                ->orderBy('sort_order', 'asc')
+                ->get(),
+            'sections' => $unit
+                ->sections()
                 ->whereNull('unit_section_id')
                 ->with('slots')
                 ->with('sections')
+                ->orderBy('sort_order', 'asc')
                 ->get(),
         ]);
     }
@@ -133,6 +139,7 @@ class UnitController extends Controller
                 ->whereNull('unit_section_id')
                 ->with('slots')
                 ->with('sections')
+                ->orderBy('sort_order', 'asc')
                 ->get(),
         ]);
     }

@@ -23,11 +23,11 @@ class StoreUnitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar' => ['image', 'nullable'],
-            'banner' => ['image', 'nullable'],
+            'avatar' => ['nullable:image'],
+            'banner' => ['nullable:image'],
             'display_name' => ['string', 'required', 'max:64'],
-            'slug' => ['string', 'required', 'lowercase', 'unique:units'],
-            'description' => ['string', 'nullable'],
+            'slug' => ['string', 'required', 'lowercase', 'unique:units', 'min:4', 'max:32'],
+            'description' => ['nullable:string'],
         ];
     }
 }

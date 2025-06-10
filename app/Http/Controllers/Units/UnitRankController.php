@@ -13,7 +13,11 @@ class UnitRankController extends Controller
     {
         return Inertia::render('units/ranks/index', [
             'unit' => $unit,
-            'ranks' => $unit->ranks,
+            'ranks' => $unit
+                ->ranks()
+                ->withCount(['members'])
+                ->orderBy('sort_order', 'asc')
+                ->get(),
         ]);
     }
 }

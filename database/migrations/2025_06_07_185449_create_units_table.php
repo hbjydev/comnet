@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('short_name');
             $table->string('icon')->nullable();
             $table->foreignUlid('unit_id');
+            $table->integer('sort_order')->default(0);
             $table->timestamps();
         });
 
@@ -38,6 +39,7 @@ return new class extends Migration
             $table->string('icon')->nullable();
             $table->foreignUlid('unit_id');
             $table->foreignUlid('unit_section_id')->nullable()->references('id')->on('unit_sections');
+            $table->integer('sort_order')->default(0);
             $table->timestamps();
         });
 
@@ -47,6 +49,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('icon')->nullable();
             $table->foreignUlid('unit_section_id');
+            $table->integer('sort_order')->default(0);
             $table->timestamps();
         });
 
@@ -57,10 +60,11 @@ return new class extends Migration
             $table->string('display_name')->nullable();
             $table->enum('role', ['owner', 'admin', 'normal', 'banned'])->default('normal');
             $table->jsonb('profile_data')->default('{}');
-            $table->foreignUlid('rank_id')->unique();
-            $table->foreignUlid('slot_id')->unique()->nullable();
+            $table->foreignUlid('unit_rank_id');
+            $table->foreignUlid('unit_slot_id')->nullable();
             $table->timestamps();
             $table->unique(['unit_id', 'user_id']);
+            $table->unique(['unit_id', 'unit_slot_id']);
         });
     }
 
