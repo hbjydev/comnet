@@ -7,6 +7,7 @@ import { Link } from '@inertiajs/react';
 import { GroupIcon, LayoutGrid } from 'lucide-react';
 import AppLogo from './app-logo';
 import { NavMemberships } from './nav-memberships';
+import AppLogoIcon from './app-logo-icon';
 
 const rootNavItems: NavItem[] = [
     {
@@ -40,9 +41,10 @@ export function AppSidebar() {
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton size="lg" asChild>
-                            <Link href="/dashboard" prefetch>
-                                <AppLogo />
+                        <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
+                            <Link href="/" prefetch>
+                                <AppLogoIcon className="text-primary size-5 fill-current" />
+                                <span className="text-base font-semibold">COMNET</span>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
