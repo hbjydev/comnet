@@ -5,7 +5,6 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, Sid
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import { GroupIcon, LayoutGrid } from 'lucide-react';
-import AppLogo from './app-logo';
 import { NavMemberships } from './nav-memberships';
 import AppLogoIcon from './app-logo-icon';
 
