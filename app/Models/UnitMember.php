@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\UnitMemberChanged;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,10 @@ class UnitMember extends Model
 {
     /** @use HasFactory<\Database\Factories\UnitMemberFactory> */
     use HasFactory, HasUlids;
+
+    protected $dispatchesEvents = [
+        'updating' => UnitMemberChanged::class,
+    ];
 
     protected $fillable = [
         'unit_id',
