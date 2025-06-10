@@ -33,7 +33,7 @@ class ProfileController extends Controller
         unset($data['avatar']);
         $request->user()->fill($data);
 
-        if ($request->hasFile('avatar') || $request->file('avatar')->size() != 0) {
+        if ($request->hasFile('avatar') && $request->file('avatar')->size() != 0) {
             $avatar = $request->file('avatar')->store('user/avatar');
             $request->user()->avatar = $avatar;
         }

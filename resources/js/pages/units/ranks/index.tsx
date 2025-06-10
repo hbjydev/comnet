@@ -22,7 +22,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export const columns = (unitSlug: string): ColumnDef<UnitRank>[] => [
+export const columns = (_unitSlug: string): ColumnDef<UnitRank>[] => [
     {
         accessorKey: 'display_name',
         header: 'Name',
@@ -34,7 +34,7 @@ export const columns = (unitSlug: string): ColumnDef<UnitRank>[] => [
     {
         id: 'actions',
         header: 'Actions',
-        cell: ({ row }) => (
+        cell: ({ row: _row }) => (
             <div className="flex items-center gap-x-2">
                 <Button size="icon" variant="ghost">
                     <Pencil />

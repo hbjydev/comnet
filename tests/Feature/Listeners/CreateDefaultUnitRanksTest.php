@@ -1,7 +1,12 @@
 <?php
 
-test('example', function () {
-    $response = $this->get('/');
+use App\Models\Unit;
 
-    $response->assertStatus(200);
+test('listener creates default resources', function () {
+    $unit = Unit::create([
+        'display_name' => 'Test Unit',
+        'slug' => 'test_unit',
+    ]);
+
+    expect(sizeof($unit->ranks) > 0)->toBe(true);
 });
