@@ -16,12 +16,12 @@ const sidebarNavItems: NavItem[] = [
 ];
 
 export default function UnitSettingsLayout({ children }: PropsWithChildren) {
+    const { unit } = usePage<{ unit: Unit }>().props;
+
     // When server-side rendering, we only render the layout on the client...
     if (typeof window === 'undefined') {
         return null;
     }
-
-    const { unit } = usePage<{ unit: Unit }>().props;
 
     const currentPath = window.location.pathname;
 

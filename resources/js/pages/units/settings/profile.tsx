@@ -49,7 +49,7 @@ export default function Edit() {
                 .then((v) => v.blob())
                 .then((v) => setData('banner', v));
         }
-    }, []);
+    }, [unit.avatar, unit.banner, setData]);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();

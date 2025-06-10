@@ -44,7 +44,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                 .then((v) => v.blob())
                 .then((v) => setData('avatar', v));
         }
-    }, []);
+    }, [auth.user.avatar, setData]);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
