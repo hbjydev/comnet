@@ -46,4 +46,9 @@ class UnitMember extends Model
     {
         return $this->belongsTo(UnitSlot::class, 'unit_slot_id');
     }
+
+    public function memberLogs(): BelongsTo
+    {
+        return $this->belongsTo(UnitMemberLog::class);
+    }
 }

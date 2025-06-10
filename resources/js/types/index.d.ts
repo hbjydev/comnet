@@ -75,7 +75,8 @@ export interface UnitSlot {
 }
 
 export interface UnitMember {
-    user_id: string;
+    id: string;
+    user_id?: string;
     unit_id: string;
     display_name: string;
     role: 'owner' | 'admin' | 'normal' | 'banned';

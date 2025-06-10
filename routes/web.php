@@ -20,9 +20,7 @@ Route::get('/units/{unit}/orbat', [UnitController::class, 'orbat'])->name('units
 Route::resource('units', UnitController::class);
 Route::resource('units.ranks', UnitRankController::class);
 Route::resource('units.sections', UnitSectionController::class);
-Route::resource('units.members', UnitMemberController::class)->scoped([
-    'member' => 'user_id',
-]);
+Route::resource('units.members', UnitMemberController::class);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {

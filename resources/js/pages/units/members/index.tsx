@@ -31,7 +31,7 @@ export const columns = (unitSlug: string): ColumnDef<HydratedMember>[] => [
         header: 'Name',
         cell: ({ row }) => (
             <div className="font-semibold underline">
-                <Link href={route('units.members.show', { unit: unitSlug, member: row.original.user_id })}>{row.getValue('name')}</Link>
+                <Link href={route('units.members.show', { unit: unitSlug, member: row.original.id })}>{row.getValue('name')}</Link>
             </div>
         ),
     },

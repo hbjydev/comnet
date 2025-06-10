@@ -19,7 +19,7 @@ export const MembersList = ({ unit }: { unit: Unit }) => {
         queryKey: ['unit', unit.slug, 'members'],
         queryFn: async () => {
             const resp = await fetch(
-                route('api.unit.members', {
+                route('api.units.members.index', {
                     unit: unit.slug,
                     per_page: 5,
                 }),
@@ -41,7 +41,7 @@ export const MembersList = ({ unit }: { unit: Unit }) => {
                     </Button>
                 </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex flex-col gap-y-4">
                 {isLoading ? (
                     [...Array(5)].map((_, idx) => (
                         <div className="flex items-center space-x-4" key={idx}>

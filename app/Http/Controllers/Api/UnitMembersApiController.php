@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Unit;
+use App\Models\UnitMember;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -18,6 +19,16 @@ class UnitMembersApiController extends Controller
                 ->with('rank')
                 ->orderBy('-created_at')
                 ->paginate($request->get('per_page')),
+        ]);
+    }
+
+    public function memberLog(Request $request, Unit $unit, UnitMember $member): Response
+    {
+        return new Response([
+            'data' => $member
+                ->memberLogs()
+                ->orderBy('created_at', 'desc')
+                ->paginate($request->get('per_page', 25)),
         ]);
     }
 }
