@@ -49,6 +49,7 @@ export interface User {
 }
 
 export interface UnitRank {
+    id: string;
     unit_id: string;
     display_name: string;
     short_name: string;

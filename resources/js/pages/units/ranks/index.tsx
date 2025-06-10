@@ -1,19 +1,13 @@
 import { Button } from '@/components/ui/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
 import UnitStructureLayout from '@/layouts/units/structure';
 import { SharedData, Unit, UnitRank, type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 import {
-    flexRender,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    useReactTable,
     type ColumnDef,
 } from '@tanstack/react-table';
 import { Pencil, Trash } from 'lucide-react';
+import { DragHandle, SortableTable } from '@/components/sortable-table';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -23,6 +17,11 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export const columns = (_unitSlug: string): ColumnDef<UnitRank>[] => [
+    {
+        id: "drag",
+        header: () => null,
+        cell: ({ row }) => <DragHandle id={row.original.id} />,
+    },
     {
         accessorKey: 'display_name',
         header: 'Name',
@@ -55,15 +54,6 @@ export default function Ranks() {
         }
     >().props;
 
-    const table = useReactTable({
-        data: ranks,
-        columns: columns(unit.slug),
-        getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
-        getSortedRowModel: getSortedRowModel(),
-        getFilteredRowModel: getFilteredRowModel(),
-    });
-
     return (
         <AppLayout
             breadcrumbs={[
@@ -85,41 +75,11 @@ export default function Ranks() {
             <UnitStructureLayout>
                 <Head title="Ranks" />
                 <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl w-full">
-                    <Table>
-                        <TableHeader>
-                            {table.getHeaderGroups().map((headerGroup) => (
-                                <TableRow key={headerGroup.id}>
-                                    {headerGroup.headers.map((header) => {
-                                        return (
-                                            <TableHead key={header.id} className="first:pl-4">
-                                                {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                                            </TableHead>
-                                        );
-                                    })}
-                                </TableRow>
-                            ))}
-                        </TableHeader>
-
-                        <TableBody>
-                            {table.getRowModel().rows?.length ? (
-                                table.getRowModel().rows.map((row) => (
-                                    <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-                                        {row.getVisibleCells().map((cell) => (
-                                            <TableCell key={cell.id} className="first:pl-4">
-                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                            </TableCell>
-                                        ))}
-                                    </TableRow>
-                                ))
-                            ) : (
-                                <TableRow>
-                                    <TableCell colSpan={columns(unit.slug).length} className="h-24 text-center">
-                                        No ranks configured.
-                                    </TableCell>
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
+                    <SortableTable
+                        data={ranks}
+                        columns={columns(unit.slug)}
+                        idKey="id"
+                    />
                 </div>
             </UnitStructureLayout>
         </AppLayout>
