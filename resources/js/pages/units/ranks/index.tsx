@@ -84,7 +84,7 @@ export default function Ranks() {
         >
             <UnitStructureLayout>
                 <Head title="Ranks" />
-                <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl">
+                <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl w-full">
                     <Table>
                         <TableHeader>
                             {table.getHeaderGroups().map((headerGroup) => (
