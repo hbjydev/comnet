@@ -36,8 +36,18 @@ export default function Register() {
     return (
         <AuthLayout title="Create an account" description="Enter your details below to create your account">
             <Head title="Register" />
-            <form className="flex flex-col gap-6" onSubmit={submit}>
-                <div className="grid gap-6">
+            <div className="grid gap-6">
+                <Button asChild className="w-full bg-[#5865F2] dark:bg-[#454FBF] dark:text-white">
+                    <a href={route('oauth.discord')}>Sign up with Discord</a>
+                </Button>
+
+                <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
+                    <span className="bg-card text-muted-foreground relative z-10 px-2">
+                        Or continue with
+                    </span>
+                </div>
+
+                <form className="flex flex-col gap-6" onSubmit={submit}>
                     <div className="grid gap-2">
                         <Label htmlFor="username">Username</Label>
                         <Input
@@ -124,15 +134,17 @@ export default function Register() {
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                         Create account
                     </Button>
-                </div>
 
-                <div className="text-center text-sm text-muted-foreground">
-                    Already have an account?{' '}
-                    <TextLink href={route('login')} tabIndex={7}>
-                        Log in
-                    </TextLink>
-                </div>
-            </form>
+
+            <div className="text-center text-sm text-muted-foreground">
+                Already have an account?{' '}
+                <TextLink href={route('login')} tabIndex={7}>
+                    Log in
+                </TextLink>
+            </div>
+                </form>
+            </div>
+
         </AuthLayout>
     );
 }
