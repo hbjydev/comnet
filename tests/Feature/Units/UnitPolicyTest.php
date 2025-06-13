@@ -18,17 +18,17 @@ test('owners can view the settings page', function () {
 });
 
 test('admins can view the settings page', function () {
-    User::first()->memberships()->first()->fill(['role' => 'admin'])->save();
+    User::first()->memberships()->first()->fill(['role' => 'admin'])->saveQuietly();
     $this->get('/units/testing-unit/edit')->assertOk();
 });
 
 test('normal members cannot view the settings page', function () {
-    User::first()->memberships()->first()->fill(['role' => 'normal'])->save();
+    User::first()->memberships()->first()->fill(['role' => 'normal'])->saveQuietly();
     $this->get('/units/testing-unit/edit')->assertForbidden();
 });
 
 test('banned members cannot view the settings page', function () {
-    User::first()->memberships()->first()->fill(['role' => 'banned'])->save();
+    User::first()->memberships()->first()->fill(['role' => 'banned'])->saveQuietly();
     $this->get('/units/testing-unit/edit')->assertForbidden();
 });
 
