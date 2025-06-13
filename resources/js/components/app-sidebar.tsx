@@ -5,8 +5,8 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, Sid
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import { GroupIcon, LayoutGrid } from 'lucide-react';
-import { NavMemberships } from './nav-memberships';
 import AppLogoIcon from './app-logo-icon';
+import { NavMemberships } from './nav-memberships';
 
 const rootNavItems: NavItem[] = [
     {
@@ -42,7 +42,7 @@ export function AppSidebar() {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
                             <Link href="/" prefetch>
-                                <AppLogoIcon className="text-primary size-5 fill-current" />
+                                <AppLogoIcon className="size-5 fill-current text-primary" />
                                 <span className="text-base font-semibold">COMNET</span>
                             </Link>
                         </SidebarMenuButton>

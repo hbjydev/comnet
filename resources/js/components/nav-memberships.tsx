@@ -74,10 +74,7 @@ export function NavMemberships() {
                                         </SidebarMenuSubItem>
 
                                         <SidebarMenuSubItem>
-                                            <SidebarMenuSubButton
-                                                asChild
-                                                isActive={activeRoute(['/ranks', '/sections'])}
-                                            >
+                                            <SidebarMenuSubButton asChild isActive={activeRoute(['/ranks', '/sections'])}>
                                                 <Link href={route('units.ranks.index', { unit: item.unit.slug })} prefetch>
                                                     <Columns3 />
                                                     Structure

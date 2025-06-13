@@ -1,13 +1,11 @@
+import { DragHandle, SortableTable } from '@/components/sortable-table';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import UnitStructureLayout from '@/layouts/units/structure';
 import { SharedData, Unit, UnitRank, type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
-import {
-    type ColumnDef,
-} from '@tanstack/react-table';
+import { type ColumnDef } from '@tanstack/react-table';
 import { Pencil, Trash } from 'lucide-react';
-import { DragHandle, SortableTable } from '@/components/sortable-table';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -18,7 +16,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export const columns = (_unitSlug: string): ColumnDef<UnitRank>[] => [
     {
-        id: "drag",
+        id: 'drag',
         header: () => null,
         cell: ({ row }) => <DragHandle id={row.original.id} />,
     },
@@ -74,12 +72,8 @@ export default function Ranks() {
         >
             <UnitStructureLayout>
                 <Head title="Ranks" />
-                <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl w-full">
-                    <SortableTable
-                        data={ranks}
-                        columns={columns(unit.slug)}
-                        idKey="id"
-                    />
+                <div className="flex h-full w-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl">
+                    <SortableTable data={ranks} columns={columns(unit.slug)} idKey="id" />
                 </div>
             </UnitStructureLayout>
         </AppLayout>

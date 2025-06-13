@@ -41,15 +41,12 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
             <div className="grid gap-6">
                 <div className="flex flex-col gap-4">
-
                     <Button asChild className="w-full bg-[#5865F2] dark:bg-[#454FBF] dark:text-white">
                         <a href={route('oauth.discord')}>Log in with Discord</a>
                     </Button>
 
-                    <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-                        <span className="bg-card text-muted-foreground relative z-10 px-2">
-                            Or continue with
-                        </span>
+                    <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+                        <span className="relative z-10 bg-card px-2 text-muted-foreground">Or continue with</span>
                     </div>
 
                     <form className="flex flex-col gap-6" onSubmit={submit}>
