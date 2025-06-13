@@ -3,7 +3,6 @@
 use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Passport\Passport;
 
 beforeEach(function () {
     $this->actingAs(User::factory()->create());

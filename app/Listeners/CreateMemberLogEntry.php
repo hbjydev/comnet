@@ -19,22 +19,26 @@ class CreateMemberLogEntry
             $log = new UnitMemberLog(['unit_member_id' => $member->id]);
 
             if ($key == 'unit_rank_id') {
-                $log->event_type = "promotion";
+                $log->event_type = 'promotion';
 
                 $prevRank = UnitRank::find($member->getOriginal($key));
                 $newRank = $member->rank;
 
-                if ($prevRank->sort_order > $member->rank->sort_order) $log->event_type = "demotion";
+                if ($prevRank->sort_order > $member->rank->sort_order) {
+                    $log->event_type = 'demotion';
+                }
                 $log->previous = $prevRank->id;
                 $log->new = $newRank->id;
-            } else if ($key == 'unit_slot_id') {
-                $log->event_type = "slot_assigned";
+            } elseif ($key == 'unit_slot_id') {
+                $log->event_type = 'slot_assigned';
                 $prevSlot = UnitSlot::find($member->getOriginal($key));
                 $newSlot = $member->slot;
 
-                if ($newSlot == null) $log->event_type = "slot_unassigned";
+                if ($newSlot == null) {
+                    $log->event_type = 'slot_unassigned';
+                }
 
-                $log->previous =$prevSlot != null ? $prevSlot->id : null;
+                $log->previous = $prevSlot != null ? $prevSlot->id : null;
                 $log->new = $newSlot != null ? $newSlot->id : null;
             }
 

@@ -4,9 +4,9 @@ use App\Http\Controllers\Api\UnitMembersApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::name("api.units.members.")
+Route::name('api.units.members.')
     ->prefix('/units/{unit:slug}/members')
-    ->group(function() {
+    ->group(function () {
         Route::get(
             '/',
             [UnitMembersApiController::class, 'index']

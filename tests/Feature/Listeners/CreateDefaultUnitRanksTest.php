@@ -8,5 +8,5 @@ test('listener creates default resources', function () {
         'slug' => 'test_unit',
     ]);
 
-    expect(sizeof($unit->ranks) > 0)->toBe(true);
+    expect(count($unit->ranks) > 0)->toBe(true);
 });

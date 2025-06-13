@@ -14,6 +14,5 @@ class UnitMemberChanged
     /**
      * Create a new event instance.
      */
-    public function __construct(public UnitMember $unitMember)
-    {}
+    public function __construct(public UnitMember $unitMember) {}
 }
